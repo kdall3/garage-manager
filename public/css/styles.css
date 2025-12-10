@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  color: #f1f1f1;
+  background-color: #1a1a1a;
+}
+
+/* #region Header */
+
+div.header-box {
+  background-color: #1a1a1a;
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* pushes the button to the right */
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+}
+
+h1.title {
+  color: #f1f1f1;
+  text-align: center;
+  padding: 10px;
+  
+  /* push title to middle*/
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+}
+
+button.login {
+  background-color: #1a1a1a;
+  width: 32px;
+  height: 32px;
+  background-image: url("img/login.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+}
+
+ul.topnav {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #2e2e2e;
+}
+
+/* Style links in topnav */
+ul.topnav li a {
+  display: block;
+  color: #f1f1f1;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover {
+  background-color: #cfcfcf;
+  color: black;
+}
+
+/* #endregion */
+
+/* #region Forms */
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+form button {
+  display: inline-block;
+  width: 200px;
+  margin-top: 12px;
+}
+
+div.field {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+div.field * {
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+}
+
+div.field textarea {
+  resize: vertical;
+}
+
+/* #endregion */
