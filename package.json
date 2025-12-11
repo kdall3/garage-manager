@@ -5,16 +5,23 @@
   "author": "Kai Dallison",
   "main": "app.js",
   "scripts": {
-    "devStart": "nodemon app.js"
+    "build": "npx tsc",
+    "start": "node dist/app.js",
+    "dev": "nodemon ./src/app.ts"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.18.2",
     "@types/node": "^24.10.2",
-    "nodemon": "^3.1.11"
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "express": "^5.2.1",
-    "express-session": "^1.18.2"
+    "express-session": "^1.18.2",
+    "mysql2": "^3.15.3"
   }
 }
