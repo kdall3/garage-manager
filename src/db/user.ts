@@ -2,16 +2,16 @@ import { db } from ".";
 import bcrypt from 'bcrypt';
 
 interface Employee {
-    employee_id: number;
-    first_name: string;
-    last_name: string;
-    username: string;
-    password_hash: string;
+    EmployeeID: number;
+    Fname: string;
+    Lname: string;
+    Username: string;
+    Password_Hash: string;
 }
 
 async function getEmployeeByUsername(username: string): Promise<Employee | null> {
     const [rows, fields] = await db.query<Employee>(
-        'SELECT employee_id, first_name, last_name, username, password_hash FROM employees WHERE username = ?',
+        'SELECT EmployeeID, Fname, Lname, Username, Password_Hash FROM Employees WHERE Username = ?',
         [username]
     );
 
@@ -25,7 +25,7 @@ export async function checkPassword(username: string, password: string): Promise
     if (user == null) { return 'USER_NOT_FOUND' }
 
     // Check password
-    if (await bcrypt.compare(password, user.password_hash) === true) { return 'OK'; }
+    if (await bcrypt.compare(password, user.Password_Hash) === true) { return 'OK'; }
     return 'INVALID_PASSWORD';
 }
 
