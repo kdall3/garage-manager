@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import { requireLogin } from "../middleware/requireLogin";
+import { checkPassword } from "../db/user";
 
 export const loginRouter = express.Router();
 
@@ -8,7 +8,7 @@ loginRouter
     .get((req: Request, res: Response) => {
         res.render('login');
     })
-    .post((req: Request, res: Response, next: NextFunction) => {
-        console.log(req.body);
+    .post(async (req: Request, res: Response, next: NextFunction) => {
+        res.send(await checkPassword(req.body.username, req.body.password));
         next();
     });
