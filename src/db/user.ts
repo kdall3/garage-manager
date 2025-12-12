@@ -11,7 +11,7 @@ interface Employee {
 
 async function getEmployeeByUsername(username: string): Promise<Employee | null> {
     const [rows, fields] = await db.query<Employee>(
-        'SELECT employee_id, first_name, last_name, username, password_hash FROM employees WHERE username = ?',
+        'SELECT employee_id, first_name, last_name, username, password_hash FROM Employees WHERE username = ?',
         [username]
     );
 
