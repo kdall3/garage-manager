@@ -18,8 +18,8 @@ async function getEmployeeByUsername(username: string): Promise<Employee | null>
     return rows[0] ?? null;
 }
 
-type PasswordCheckResult = 'USER_NOT_FOUND' | 'INVALID_PASSWORD' | 'OK';
-export async function checkPassword(username: string, password: string): Promise<PasswordCheckResult> {
+export type CheckPasswordResult = 'USER_NOT_FOUND' | 'INVALID_PASSWORD' | 'OK';
+export async function checkPassword(username: string, password: string): Promise<CheckPasswordResult> {
     // Get user
     let user = await getEmployeeByUsername(username);
     if (user == null) { return 'USER_NOT_FOUND' }

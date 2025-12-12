@@ -1,0 +1,7 @@
+<div class="field">
+    <label for="<%= name %>"><%= label %></label>
+    <input type="<%= type %>" id="<%= name %>" name="<%= name %>" value="<%= form_values[name] ?? "" %>">
+</div>
+<p class="error-message">
+    <%= input_errors[name] ?? "" %>
+</p>

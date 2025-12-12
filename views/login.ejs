@@ -10,15 +10,21 @@
     <%- include("partials/header") %>
 
     <form action="/login" method="POST">
-        <div class="field">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
-        </div>
+        <%- include("partials/field", {
+            label: "Username",
+            name: "username",
+            type: "text",
+            form_values,
+            input_errors
+        }) %>
 
-        <div class="field">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
-        </div>
+        <%- include("partials/field", {
+            label: "Password",
+            name: "password",
+            type: "text",
+            form_values,
+            input_errors
+        }) %>
 
         <button type="submit">Log In</button>
     </form>
