@@ -19,7 +19,11 @@ const pool = mysql.createPool({
 export const db: DB = {
     pool,
     query: async (sql, params) => {
-        const [rows, fields] = await pool.query<RowDataPacket[]>(sql, params);
-        return [rows as any, fields];
+        try {
+            const [rows, fields] = await pool.query<RowDataPacket[]>(sql, params);
+            return [rows as any, fields];
+        } catch (err) {
+            throw new Error(`Database connection failed: ${err}`);
+        }
     }
 }
