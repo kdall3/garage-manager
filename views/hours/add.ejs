@@ -7,10 +7,24 @@
     <title>garage-manager</title>
 </head>
 <body>
-    <%- include("partials/header") %>
+    <%- include("../partials/header") %>
 
     <form action="/hours/add" method="POST">
-        <label></label>
+        <%- include("../partials/field", {
+            label: "Start Time",
+            name: "start_time",
+            type: "datetime-local",
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "End Time",
+            name: "end_time",
+            type: "datetime-local",
+            form_values,
+            input_errors
+        }) %>
     </form>
 </body>
 </html>

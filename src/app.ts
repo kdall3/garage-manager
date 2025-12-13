@@ -18,10 +18,14 @@ app.use(session({
 }))
 
 app.get("/", requireLogin, (_: Request, res: Response) => {
-    res.send("WE ARE IN");
+    res.redirect("/hours");
 })
 
 import { loginRouter } from './routes/login';
 app.use('/login', loginRouter);
+
+import { hoursRouter } from './routes/hours';
+app.use('/hours', hoursRouter);
+
 
 app.listen(3000);
