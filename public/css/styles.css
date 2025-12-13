@@ -7,67 +7,58 @@ header {
   padding: 0;
 }
 
+h1.subheader {
+  font-size: x-large;
+  margin: 0;
+  margin-top: 10px;
+  padding: 16px;
+}
+
 body {
   margin: 0;
   padding: 0;
-
-  color: #f1f1f1;
-  background-color: #1a1a1a;
-}
-
-/* #region Header */
-
-div.header-box {
-  background-color: #1a1a1a;
-  position: relative;
-  display: flex;
-  justify-content: flex-end; /* pushes the button to the right */
-  align-items: center;
-  height: 60px;
-  padding: 0 20px;
-}
-
-h1.title {
-  color: #f1f1f1;
   text-align: center;
-  padding: 10px;
-  
-  /* push title to middle*/
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-}
 
-button.login {
+  color: #f1f1f1;
   background-color: #1a1a1a;
-  width: 32px;
-  height: 32px;
-  background-image: url("img/login.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border: none;
-  cursor: pointer;
 }
 
-ul.topnav {
+/* #region Profile button */
+a.profile-button {
+  position: fixed;
+  top: 10px;    /* distance from the top */
+  right: 10px;  /* distance from the right */
+  z-index: 100; /* ensures it stays above other content */
+  text-decoration: none;
+}
+/* #endregion */
+
+/* #region Footer */
+
+div.footer-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+ul.nav {
   display: flex;
+  justify-content: center;
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background-color: #2e2e2e;
 }
 
 /* Style links in topnav */
-ul.topnav li a {
+ul.nav li a {
   display: block;
   color: #f1f1f1;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-ul.topnav li a:hover {
+ul.nav li a:hover {
   background-color: #cfcfcf;
   color: black;
 }
@@ -80,6 +71,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: left;
   padding: 20px;
 }
 
@@ -107,7 +99,7 @@ div.field textarea {
 }
 
 p.success-message {
-  color: rgb(3, 170, 0);
+  color: rgb(0, 170, 0);
   margin: 0;
   margin-top: 12px;
   margin-bottom: 12px;
@@ -115,7 +107,7 @@ p.success-message {
 }
 
 p.error-message {
-  color: rgb(181, 0, 0);
+  color: rgb(225, 0, 0);
   margin: 0;
   margin-bottom: 12px;
   padding: 0;
