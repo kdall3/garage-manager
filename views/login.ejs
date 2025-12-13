@@ -7,13 +7,16 @@
     <title>garage-manager</title>
 </head>
 <body>
-    <%- include("partials/header") %>
+    <%- include("partials/profile-button") %>
+
+    <h1 class="subheader">Login</h1>
 
     <form action="/login" method="POST">
         <%- include("partials/field", {
             label: "Username",
             name: "username",
             type: "text",
+            required: true,
             form_values,
             input_errors
         }) %>
@@ -21,7 +24,8 @@
         <%- include("partials/field", {
             label: "Password",
             name: "password",
-            type: "text",
+            type: "password",
+            required: true,
             form_values,
             input_errors
         }) %>
@@ -29,4 +33,6 @@
         <button type="submit">Log In</button>
     </form>
 </body>
+
+<%- include("partials/footer") %>
 </html>

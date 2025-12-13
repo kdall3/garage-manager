@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 
-export async function requireLogin(req: Request, res: Response, next: NextFunction) {
-    if (!req.session.loggedIn) {
-        return res.redirect('/login');
+export function requireLogin(req: Request, res: Response, next: NextFunction) {
+    if (!req.session.user_id) {
+        req.session.return_to_url = req.originalUrl;
+        return res.redirect(`/login`);
     }
 
     next();

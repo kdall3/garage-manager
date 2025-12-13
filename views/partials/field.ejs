@@ -1,6 +1,6 @@
 <div class="field">
     <label for="<%= name %>"><%= label %></label>
-    <input type="<%= type %>" id="<%= name %>" name="<%= name %>" value="<%= form_values[name] ?? "" %>">
+    <input type="<%= type %>" id="<%= name %>" name="<%= name %>" value="<%= form_values[name] ?? "" %>" <%= required ? "required" : "" %>>
 </div>
 <p class="error-message">
     <%= input_errors[name] ?? "" %>

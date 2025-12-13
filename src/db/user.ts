@@ -1,7 +1,7 @@
 import { db } from ".";
 import bcrypt from 'bcrypt';
 
-interface Employee {
+export interface Employee {
     employee_id: number;
     first_name: string;
     last_name: string;
@@ -9,8 +9,26 @@ interface Employee {
     password_hash: string;
 }
 
-async function getEmployeeByUsername(username: string): Promise<Employee | null> {
-    const [rows, fields] = await db.query<Employee>(
+export async function getIdByUsername(username: string): Promise<number | null> {
+    const [rows] = await db.query<{ employee_id: number }>(
+        'SELECT employee_id FROM employees WHERE username = ?',
+        [username]
+    );
+
+    return rows[0]?.employee_id ?? null;
+}
+
+export async function getEmployeeById(employee_id: number): Promise<Employee | null> {
+    const [rows] = await db.query<Employee>(
+        'SELECT employee_id, first_name, last_name, username, password_hash FROM employees WHERE employee_id = ?',
+        [employee_id]
+    );
+
+    return rows[0] ?? null;
+}
+
+export async function getEmployeeByUsername(username: string): Promise<Employee | null> {
+    const [rows] = await db.query<Employee>(
         'SELECT employee_id, first_name, last_name, username, password_hash FROM employees WHERE username = ?',
         [username]
     );
@@ -31,5 +49,5 @@ export async function checkPassword(username: string, password: string): Promise
 
 export async function hashPassword(password: string): Promise<string> {
     const SALT_ROUNDS = 10;
-    return bcrypt.hash(password, 10)
+    return bcrypt.hash(password, SALT_ROUNDS)
 }
