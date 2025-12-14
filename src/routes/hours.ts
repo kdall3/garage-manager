@@ -24,7 +24,7 @@ hoursRouter
     .post(requireLogin, async (req: Request, res: Response) => {
         if (!req.session.user_id) { throw new Error('No session userID'); }
 
-        switch (await addShift(req.session.user_id, req.body.reg_plate, new Date(req.body.start_time), new Date(req.body.end_time))) {
+        switch (await addShift(req.session.user_id, req.body.reg_plate, new Date(req.body.start_time), new Date(req.body.end_time), req.body.notes)) {
             case 'OK': {
                 req.session.success_message = 'Successfully added shift.';
                 return res.redirect(req.originalUrl);

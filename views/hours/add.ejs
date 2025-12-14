@@ -39,6 +39,15 @@
             input_errors
         }) %>
 
+        <%- include("../partials/field-textarea", {
+            label: "Notes",
+            name: "notes",
+            rows: 3,
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
         <p class="success-message">
             <%= success_message ?? "" %>
         </p>
