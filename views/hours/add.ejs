@@ -7,10 +7,54 @@
     <title>garage-manager</title>
 </head>
 <body>
-    <%- include("partials/header") %>
+    <%- include("../partials/profile-button") %>
+
+    <h1 class="subheader">Register New Shift</h1>
 
     <form action="/hours/add" method="POST">
-        <label></label>
+        <%- include("../partials/field", {
+            label: "Car Registration",
+            name: "reg_plate",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Start Time",
+            name: "start_time",
+            type: "datetime-local",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "End Time",
+            name: "end_time",
+            type: "datetime-local",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field-textarea", {
+            label: "Notes",
+            name: "notes",
+            rows: 3,
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <p class="success-message">
+            <%= success_message ?? "" %>
+        </p>
+
+        <button type="submit">Add Shift</button>
     </form>
+
+    <%- include("../partials/footer") %>
 </body>
 </html>

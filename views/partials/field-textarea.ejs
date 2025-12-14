@@ -1,0 +1,7 @@
+<div class="field">
+    <label for="<%= name %>"><%= label %></label>
+    <textarea id="<%= name %>" name="<%= name %>" rows="<%= rows %>" <%= required ? "required" : "" %>><%= form_values[name] ?? ""%></textarea>
+</div>
+<p class="error-message">
+    <%= input_errors[name] ?? "" %>
+</p>
