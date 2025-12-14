@@ -48,15 +48,6 @@
             input_errors
         }) %>
 
-        <%- include("../partials/field-textarea", {
-            label: "Test",
-            name: "test",
-            rows: 3,
-            required: false,
-            form_values,
-            input_errors
-        }) %>
-
         <p class="success-message">
             <%= success_message ?? "" %>
         </p>
