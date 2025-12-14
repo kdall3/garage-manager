@@ -1,19 +1,6 @@
 import { db } from ".";
 import bcrypt from 'bcrypt';
 
-<<<<<<< HEAD
-interface Employee {
-    EmployeeID: number;
-    Fname: string;
-    Lname: string;
-    Username: string;
-    Password_Hash: string;
-}
-
-async function getEmployeeByUsername(username: string): Promise<Employee | null> {
-    const [rows, fields] = await db.query<Employee>(
-        'SELECT EmployeeID, Fname, Lname, Username, Password_Hash FROM Employees WHERE Username = ?',
-=======
 export interface Employee {
     employee_id: number;
     first_name: string;
@@ -43,7 +30,6 @@ export async function getEmployeeById(employee_id: number): Promise<Employee | n
 export async function getEmployeeByUsername(username: string): Promise<Employee | null> {
     const [rows] = await db.query<Employee>(
         'SELECT employee_id, first_name, last_name, username, password_hash FROM employees WHERE username = ?',
->>>>>>> 178c191415b3ace46ef0a6a901a8891757bdc1bb
         [username]
     );
 
@@ -57,7 +43,7 @@ export async function checkPassword(username: string, password: string): Promise
     if (user == null) { return 'USER_NOT_FOUND' }
 
     // Check password
-    if (await bcrypt.compare(password, user.Password_Hash) === true) { return 'OK'; }
+    if (await bcrypt.compare(password, user.password_hash) === true) { return 'OK'; }
     return 'INVALID_PASSWORD';
 }
 
