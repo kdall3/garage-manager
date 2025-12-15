@@ -27,5 +27,8 @@ app.use('/login', loginRouter);
 import { hoursRouter } from './routes/hours';
 app.use('/hours', hoursRouter);
 
+import { transactionsRouter } from './routes/transactions';
+app.use('/transactions', transactionsRouter);
+
 
 app.listen(3000);
