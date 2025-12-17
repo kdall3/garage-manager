@@ -1,0 +1,26 @@
+<div class="timeline">
+    <div class="time-labels">
+        <span>0:00</span>
+        <span>6:00</span>
+        <span>12:00</span>
+        <span>18:00</span>
+        <span>23:59</span>
+    </div>
+
+    <% for (let i = 0; i < shift_list.length; i++) { 
+        const employee_shift = shift_list[i]; %>
+        <div class="employee-row">
+            <div class="employee-name"><%= employee_shift.employee_name %></div>
+            <div class="timeline-bar">
+                <% for (let j = 0; j < employee_shift.shifts.length; j++) { 
+                    const shift = employee_shift.shifts[j];
+                    const start_percent = (shift.start_hour * 60 + shift.start_minute) / (24 * 60) * 100;
+                    const end_percent = (shift.end_hour * 60 + shift.end_minute) / (24 * 60) * 100;
+                    const width_percent = end_percent - start_percent;
+                %>
+                <%- `<div class="shift" style="left: ${start_percent}%; width: ${width_percent}%"></div>` %>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+</div>

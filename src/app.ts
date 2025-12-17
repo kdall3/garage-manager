@@ -18,7 +18,7 @@ app.use(session({
 }))
 
 app.get("/", requireLogin, (_: Request, res: Response) => {
-    res.redirect("/hours");
+    res.render('');
 })
 
 import { loginRouter } from './routes/login';

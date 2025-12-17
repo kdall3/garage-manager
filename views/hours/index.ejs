@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>garage-manager</title>
+</head>
+<body>
+    <%- include("../partials/profile-button") %>
+
+    <h1 class="subheader">Shift Calendar</h1>
+
+    <%- shift_list === null ? '' : include("../partials/shift-timeline", { shift_list }) %>
+
+    <form action="/hours/" method="POST">
+        <%- include("../partials/field", {
+            label: "Date",
+            name: "date",
+            type: "date",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <button type="submit">Display Shifts</button>
+    </form>
+
+    <%- include("../partials/footer") %>
+</body>
+</html>

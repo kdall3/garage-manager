@@ -120,3 +120,57 @@ p.error-message {
 }
 
 /* #endregion */
+
+/* #region Shift Timeline */
+
+div.timeline {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+div.timeline div.time-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+div.timeline div.employee-row {
+  display: flex;
+  position: relative;
+  height: 30px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+div.timeline div.employee-row div.employee-name {
+  width: 120px;
+  flex-shrink: 0;
+  padding-right: 10px;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+div.timeline div.employee-row div.timeline-bar {
+  position: relative;
+  flex-grow: 1;
+  background-color: #f9f9f9;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+div.timeline div.employee-row div.timeline-bar div.shift {
+  position: absolute;
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* #endregion */
