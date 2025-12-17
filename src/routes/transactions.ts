@@ -9,7 +9,7 @@ transactionsRouter
     .route('/')
     .get(requireLogin, async (req: Request, res: Response) => {
         const transactions = await getLatestTransactions(20);
-        res.render('transactions/index', {
+        res.render('transactions', {
             transactions
         });
     })
