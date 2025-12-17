@@ -9,7 +9,7 @@ transactionsRouter
     .route('/')
     .get(requireLogin, async (req: Request, res: Response) => {
         const transactions = await getLatestTransactions(20);
-        res.render('transactions/transactions', {
+        res.render('transactions/index', {
             transactions
         });
     })
@@ -30,6 +30,10 @@ transactionsRouter
                     req.session.success_message = 'Successfully added transaction.';
                     return res.redirect(req.originalUrl);
                 }
-            }
-        }
-    );
+                case 'CAR_NOT_FOUND': {
+                req.session.input_errors ??= {};
+                req.session.input_errors['reg_plate'] = 'Car registration not in database.';
+                req.session.form_values = { ...req.body };
+                return res.redirect(req.originalUrl)
+            }}
+        });
