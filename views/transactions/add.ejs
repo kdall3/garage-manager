@@ -12,8 +12,53 @@
     <h1 class="subheader">Add Transaction</h1>
 
     <form action="/transactions/add" method="POST">
+        
+        <%- include("../partials/field", {
+            label: "Title",
+            name: "title",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
 
-        <button type="submit">Add Shift</button>
+        <%- include("../partials/field", {
+            label: "Price",
+            name: "price",
+            type: "int",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Date",
+            name: "date",
+            type: "datetime-local",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Platform",
+            name: "platform",
+            type: "text",
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Car Registration",
+            name: "reg_plate",
+            type: "text",
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <button type="submit">Add Transaction</button>
 
     </form>
 
