@@ -93,8 +93,8 @@ form button {
 }
 
 div.field {
-  position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
   margin-bottom: 12px;
   padding: 0;
 }
