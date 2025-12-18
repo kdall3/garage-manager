@@ -115,6 +115,7 @@ div.field * {
 
 div.field textarea {
   resize: vertical;
+  min-height: 22px;
 }
 
 p.success-message {
