@@ -1,0 +1,49 @@
+<div class="timeline-wrapper">
+    <%- left_redirect ? `<a class="arrow" href="${left_redirect}">\<</a>` : '' %>
+    
+    <% if (shift_list.length === 0) { %>
+        <p>No shifts on selected date</p>
+    <% } else { %>
+        <div class="timeline">
+            <div class="time-labels">
+                <% times = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'] %>
+                <% for (let i = 0; i < times.length; i++) { %>
+                    <%- `
+                    <span style="left: ${(i / (times.length - 1)) * 100}%;">
+                        ${times[i]}
+                    </span>
+                    ` %>
+                <% } %>
+            </div>
+
+            <% for (let i = 0; i < shift_list.length; i++) { 
+                const employee_shift = shift_list[i]; %>
+                <div class="employee-row">
+                    <div class="employee-name"><%= employee_shift.employee_name %></div>
+                    <div class="timeline-bar">
+                        <% for (let j = 0; j < employee_shift.shifts.length; j++) { 
+                            const shift = employee_shift.shifts[j];
+                            const start_percent = (shift.start_hour * 60 + shift.start_minute) / (24 * 60) * 100;
+                            const end_percent = (shift.end_hour * 60 + shift.end_minute) / (24 * 60) * 100;
+                            const width_percent = end_percent - start_percent;
+                        %>
+                            <%- `
+                            <div class="shift" style="left: ${start_percent}%; width: ${width_percent}%"><div class="shift-label">${shift.make_model}
+                                <span class="extra-info">\
+                                    Car worked on: ${shift.make_model}
+                                    Car reg: ${shift.reg_plate}
+                                    Start time: ${String(shift.start_hour).padStart(2, '0')}:${String(shift.start_minute).padStart(2, '0')}
+                                    End time: ${String(shift.end_hour).padStart(2, '0')}:${String(shift.end_minute).padStart(2, '0')}
+                                    Notes: ${shift.notes ?? "N/A" }
+                                </span>
+                            </div></div>
+                            ` %>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+
+    <%- right_redirect ? `<a class="arrow" href="${right_redirect}">\></a>` : '' %>
+</div>

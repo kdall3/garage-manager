@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>garage-manager</title>
+</head>
+<body>
+    <%- include("../partials/profile-button") %>
+
+    <h1 class="subheader">Shift Calendar</h1>
+    <%- date === null ? '' : `<h2 class="subheader">${date.toDateString()}</h2>` %>
+
+    <% if (shift_list != null && date) { %>
+        <% let next_date = new Date(new Date(date).setDate(date.getDate() + 1)); %>
+        <% let previous_date = new Date(new Date(date).setDate(date.getDate() - 1)); %>
+
+        <%-
+        include("../partials/shift-timeline", {
+            shift_list,
+            left_redirect: `/hours/?date=${previous_date.toISOString().split('T')[0]}`,
+            right_redirect: `/hours/?date=${next_date.toISOString().split('T')[0]}`})
+        %>
+    <% } %>
+
+    <form action="/hours/" method="get">
+        <%- include("../partials/field", {
+            label: "Date",
+            name: "date",
+            type: "date",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <button type="submit">Display Shifts</button>
+    </form>
+
+    <%- include("../partials/footer") %>
+</body>
+</html>
