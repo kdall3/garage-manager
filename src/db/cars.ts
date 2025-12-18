@@ -22,3 +22,31 @@ export async function getCarFromReg(reg_plate: string): Promise<Car | null> {
 
     return null;
 }
+
+export async function getCarsInStock(): Promise<Car[]> {
+  const [rows] = await db.query<Car>(
+    `
+    SELECT
+      c.reg_plate,
+      c.make,
+      c.model,
+      c.year,
+      c.mileage,
+      c.status,
+      SUM(t.price) AS profit_loss
+    FROM cars c
+    LEFT JOIN transactions t
+    ON t.reg_plate = c.reg_plate
+    GROUP BY
+      c.reg_plate,
+      c.make,
+      c.model,
+      c.year,
+      c.mileage,
+      c.status
+    ORDER BY c.reg_plate;
+    `
+  );
+
+  return rows;
+}

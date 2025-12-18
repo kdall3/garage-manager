@@ -119,4 +119,42 @@ p.error-message {
   padding: 0;
 }
 
+p.profit-loss-bar {
+  padding: 10px 10px;
+  border-radius: 6px;
+}
+
+p.profit-loss-bar.profit {
+  background-color: #2e7d32; /* green */
+  color: #ffffff;
+}
+
+p.profit-loss-bar.loss {
+  background-color: #c62828; /* red */
+  color: #ffffff;
+}
+
+div.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+a.car-card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+a.car-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+}
+
+
 /* #endregion */
