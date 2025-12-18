@@ -7,6 +7,14 @@ header {
   padding: 0;
 }
 
+span {
+  /* Weird phone number detection fix */
+  user-select: text;
+  -webkit-touch-callout: none;
+  -webkit-user-select: text;
+  -webkit-tap-highlight-color: transparent;
+}
+
 h1.subheader {
   font-size: x-large;
   margin: 0;
