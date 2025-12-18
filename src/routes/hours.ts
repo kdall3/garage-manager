@@ -7,20 +7,43 @@ export const hoursRouter = express.Router();
 hoursRouter.use(requireLogin);
 
 hoursRouter.route('/')
-    .get((req: Request, res: Response) => {
+    .get(async (req: Request, res: Response) => {
+        // Get date GET argument
+        const date_str = req.query['date'] as string
+        let date: Date | null = null;
+
+        // Parse date if exists
+        if (date_str) {
+            date = new Date(date_str)
+            if (isNaN(date.getTime())) { date = null; }
+        } else {
+            const date = new Date(); // today's date
+
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, '0'); // months are 0-based
+            const dd = String(date.getDate()).padStart(2, '0');
+
+            return res.redirect(`/hours/?date=${yyyy}-${mm}-${dd}`)
+        }
+
+        // Get shifts if we have a date
+        let shift_list = null;
+        if (!date) { date = new Date() }
+        if (date) {
+            shift_list = await getShiftsOnDate(date);
+        }
+
         res.render('hours', {
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},
-            shift_list: req.session.shift_list ?? null
+            shift_list,
+            date
         });
 
         // Delete form session vars after we are done rendering them
-        delete req.session.input_errors, req.session.success_message, req.session.shift_list;
-    })
-    .post(async (req: Request, res: Response) => {
-        req.session.shift_list = await getShiftsOnDate(req.body['date']);
-
-        return res.redirect(req.originalUrl);
+        delete
+            req.session.input_errors,
+            req.session.success_message
     })
 
 hoursRouter.route('/add')

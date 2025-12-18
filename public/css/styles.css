@@ -10,8 +10,13 @@ header {
 h1.subheader {
   font-size: x-large;
   margin: 0;
-  margin-top: 10px;
   padding: 16px;
+}
+
+h2.subheader {
+  font-size: medium;
+  margin: 0;
+  padding-bottom: 8px;
 }
 
 body {
@@ -123,35 +128,72 @@ p.error-message {
 
 /* #region Shift Timeline */
 
+div.timeline-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  margin: 0 auto;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+div.timeline-wrapper a.arrow {
+  color: #f1f1f1;
+  padding: 16px;
+  text-decoration: none;
+  font-size: xx-large;
+}
+
+div.timeline-wrapper p {
+  width: 1000px;
+  max-width: 100%;
+}
+
+div.timeline-wrapper a.arrow:active {
+  color: #ff0000;
+}
+
 div.timeline {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin: 20px 0;
   max-width: 1000px;
-  margin: 20px auto;
-  border: 1px solid #ccc;
+  padding-right: 5px;
   box-sizing: border-box;
 }
 
 div.timeline div.time-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
+  position: relative;
+  width: 100% - 120px;
+  height: 30px;
   margin-bottom: 5px;
+  margin-left: 120px;
+  margin-right: 0;
+}
+
+div.timeline div.time-labels span {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%); /* center horizontally and vertically */
 }
 
 div.timeline div.employee-row {
   display: flex;
   position: relative;
   height: 30px;
-  border-bottom: 1px solid #eee;
   margin-bottom: 5px;
   box-sizing: border-box;
 }
 
 div.timeline div.employee-row div.employee-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 120px;
   flex-shrink: 0;
+  padding-left: 10px;
   padding-right: 10px;
   font-weight: bold;
   box-sizing: border-box;
@@ -171,6 +213,54 @@ div.timeline div.employee-row div.timeline-bar div.shift {
   background-color: #4CAF50;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+div.shift {
+  /* Centre text */
+  display: flow-root;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 2px;
+}
+
+div.shift-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  /* Prevent text from wrapping */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+div.shift-label span.extra-info {
+  display: block;
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: pre-line;
+
+  /* Position */
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 9999;
+  max-width: 250px;
+
+  /* Fade-in effect */
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  pointer-events: none;
+}
+
+div.shift:hover div.shift-label span.extra-info {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* #endregion */
