@@ -46,8 +46,6 @@ hoursRouter.route('/')
             req.session.success_message
     })
 
-hoursRouter.route('/add')
-    .get((req: Request, res: Response) => {
 hoursRouter
     .route('/add')
     .get(requireLogin, (req: Request, res: Response) => {
