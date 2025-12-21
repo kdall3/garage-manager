@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <%- include("../partials/profile-button") %>
+
+    <h1 class="subheader">Dashboard</h1>
+
+    <div class="car-grid">
+    <% if (!cars || cars.length === 0) { %>
+        <p>No cars currently in stock.</p>
+    <% } %>
+
+    <% cars.forEach(car => { %>
+        <a href="/hours/add?reg_plate=<%= encodeURIComponent(car.reg_plate) %>"class="car-card">
+        <h3><%= car.reg_plate %></h3>
+        <p><strong><%= car.make %> <%= car.model %></strong></p>
+        <p><%= car.year %> • <%= car.mileage %> miles</p>
+        <p class="status <%= car.status %>"><%= car.status %></p>
+        <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= car.profit_loss %></p>
+        </a>
+
+    <% }) %>
+    </div>
+
+    <%- include("../partials/footer") %>
+
+</body>
+</html>

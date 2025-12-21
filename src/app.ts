@@ -18,7 +18,7 @@ app.use(session({
 }))
 
 app.get("/", requireLogin, (_: Request, res: Response) => {
-    res.render('');
+    res.redirect('/dashboard');
 })
 
 import { loginRouter } from './routes/login';
@@ -29,6 +29,9 @@ app.use('/hours', hoursRouter);
 
 import { transactionsRouter } from './routes/transactions';
 app.use('/transactions', transactionsRouter);
+
+import { dashboardRouter } from './routes/dashboard';
+app.use('/dashboard', dashboardRouter);
 
 
 app.listen(3000);
