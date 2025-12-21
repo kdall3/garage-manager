@@ -11,6 +11,14 @@ hoursRouter.get('/', (req: Request, res: Response) => {
 hoursRouter
     .route('/add')
     .get(requireLogin, (req: Request, res: Response) => {
+
+        req.session.form_values ??= {};
+        
+        // If reg_plate is in query, prefill it
+        if (typeof req.query['reg_plate'] === 'string') {
+            req.session.form_values['reg_plate'] = req.query['reg_plate'];
+        }
+
         res.render('hours/add', {
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},

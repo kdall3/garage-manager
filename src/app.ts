@@ -18,7 +18,7 @@ app.use(session({
 }))
 
 app.get("/", requireLogin, (_: Request, res: Response) => {
-    res.redirect("/dashboard");
+    res.redirect('/dashboard');
 })
 
 import { loginRouter } from './routes/login';
