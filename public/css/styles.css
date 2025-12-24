@@ -271,6 +271,11 @@ div.shift:hover div.shift-label span.extra-info {
   visibility: visible;
   opacity: 1;
 }
+
+/* #endregion */
+
+/* #region Dashboard */
+
 p.profit-loss-bar {
   padding: 10px 10px;
   border-radius: 6px;
@@ -287,10 +292,17 @@ p.profit-loss-bar.loss {
 }
 
 div.car-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 16px;
   margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.car-grid > * {
+  flex: 1 0 220px;
 }
 
 a.car-card {
@@ -307,6 +319,5 @@ a.car-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 24px rgba(0,0,0,0.4);
 }
-
 
 /* #endregion */
