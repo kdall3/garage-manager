@@ -22,6 +22,7 @@
         <p><strong><%= car.make %> <%= car.model %></strong></p>
         <p><%= car.year %> • <%= car.mileage %> miles</p>
         <p class="status <%= car.status %>"><%= car.status %></p>
+        <p>Total Hours: <%= carHours.get(car.reg_plate) %>h</p>
         <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= car.profit_loss %></p>
         </a>
 

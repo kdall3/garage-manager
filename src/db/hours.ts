@@ -30,6 +30,12 @@ interface Shift {
     notes: string
 }
 
+// Total hours worked for each reg plate
+export interface CarHours {
+    reg_plate: string;
+    total_hours: number;
+}
+
 export type AddShiftResult = 'OK' | 'CAR_NOT_FOUND' | 'EMPLOYEE_NOT_FOUND' | 'WRONG_DATE_ORDER'
 export async function addShift(employee_id: number, reg_plate: string, start_time: Date, end_time: Date, notes: string): Promise<AddShiftResult> {
     const [car, employee] = await Promise.all([
@@ -84,4 +90,22 @@ export async function getShiftsOnDate(date: Date): Promise<EmployeeShifts[]> {
     }, [])
 
     return employee_shifts;
+}
+
+export async function hoursPerCar(): Promise<Map<string, number>> {
+    const [rows] = await db.query<CarHours>(
+    `
+    SELECT
+        reg_plate,
+        ROUND(SUM(TIMESTAMPDIFF(MINUTE, start, end)) / 60, 2) AS total_hours
+    FROM hours
+    GROUP BY reg_plate
+    `
+    );
+
+    const hoursMap = new Map(
+        rows.map(car => [car.reg_plate, car.total_hours])
+    );
+
+    return hoursMap;
 }
