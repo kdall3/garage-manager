@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <title>Cars</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 
     <%- include("../partials/profile-button") %>
 
-    <h1 class="subheader">Dashboard</h1>
+    <h1 class="subheader">Cars</h1>
 
     <div class="car-grid">
-    <% if (!carsInStock || carsInStock.length === 0) { %>
-        <p>No cars currently in stock.</p>
-    <% } %>
 
-    <% carsInStock.forEach(car => { %>
+    <% cars.forEach(car => { %>
         <a href="/hours/add?reg_plate=<%= encodeURIComponent(car.reg_plate) %>"class="car-card">
         <h3><%= car.reg_plate %></h3>
         <p><strong><%= car.make %> <%= car.model %></strong></p>

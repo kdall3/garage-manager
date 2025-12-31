@@ -33,5 +33,7 @@ app.use('/transactions', transactionsRouter);
 import { dashboardRouter } from './routes/dashboard';
 app.use('/dashboard', dashboardRouter);
 
+import { carsRouter } from './routes/cars';
+app.use('/cars', carsRouter);
 
 app.listen(3000);

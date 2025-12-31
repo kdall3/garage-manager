@@ -3,18 +3,16 @@ import { requireLogin } from "../middleware/requireLogin";
 import { getCars } from "../db/cars";
 import { hoursPerCar } from "../db/hours";
 
-export const dashboardRouter = express.Router();
+export const carsRouter = express.Router();
 
-dashboardRouter
+carsRouter
     .route('/')
     .get(requireLogin, async (req: Request, res: Response) => {
         const cars = await getCars();
-        const carsInStock = cars.filter(car => car.status !== 'Sold');
-
         const carHours = await hoursPerCar();
-
-        res.render("dashboard", {
-            carsInStock,
+        
+        res.render("cars", {
+            cars,
             carHours
         });
     });

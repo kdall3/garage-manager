@@ -23,7 +23,7 @@ export async function getCarFromReg(reg_plate: string): Promise<Car | null> {
     return null;
 }
 
-export async function getCarsInStock(): Promise<Car[]> {
+export async function getCars(): Promise<Car[]> {
   const [rows] = await db.query<Car>(
     `
     SELECT
