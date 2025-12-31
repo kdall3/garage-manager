@@ -42,6 +42,30 @@ body {
   background-color: #1a1a1a;
 }
 
+button {
+  margin-top: 16px;
+  padding: 14px 16px;
+
+  background: #1e1e1e;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 12px;
+
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+
+  box-shadow: 0 1px 16px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
 /* #region Profile button */
 a.profile-button {
   position: fixed;
@@ -275,6 +299,45 @@ div.shift:hover div.shift-label span.extra-info {
 /* #endregion */
 
 /* #region Dashboard */
+
+/* === Transactions Page === */
+
+table.transactions-table {
+  width: 100%;
+  max-width: 1000px;
+  margin: 24px auto;
+  border-collapse: collapse;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+table.transactions-table thead {
+  background: #2a2a2a;
+}
+
+table.transactions-table th,
+table.transactions-table td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+table.transactions-table th {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #bbb;
+}
+
+table.transactions-table td {
+  color: #eee;
+  border-top: 1px solid #2f2f2f;
+}
+
+table.transactions-table tbody tr:hover {
+  background: #262626;
+}
 
 p.profit-loss-bar {
   padding: 10px 10px;
