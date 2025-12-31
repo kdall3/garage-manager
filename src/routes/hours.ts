@@ -6,7 +6,8 @@ import { getShiftsOnDate } from "../db/hours";
 export const hoursRouter = express.Router();
 hoursRouter.use(requireLogin);
 
-hoursRouter.route('/')
+hoursRouter
+    .route('/')
     .get(async (req: Request, res: Response) => {
         // Get date GET argument
         const date_str = req.query['date'] as string

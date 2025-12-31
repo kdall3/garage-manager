@@ -44,3 +44,21 @@ export async function getCars(): Promise<Car[]> {
 
   return rows;
 }
+
+export type AddCarResult = 'OK' | 'CAR_ALREADY_EXISTS'
+export async function addCar(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string, buy_price: number, platform: string, buy_date: Date): Promise<AddCarResult> {
+
+  if (getCarFromReg(reg_plate) != null) {return 'CAR_ALREADY_EXISTS'}
+
+  await db.query(
+      'INSERT INTO cars (reg_plate, make, model, year, mileage, colour, damage, description, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [reg_plate, make, model, year, mileage, colour, damage, description, status]
+  )
+
+  await db.query(
+      'INSERT INTO transactions (reg_plate, title, price, platform, date) VALUES (?, "Car", ?, ?, ?)',
+      [reg_plate, buy_price, platform, buy_date]
+  )
+
+  return 'OK'
+  };
