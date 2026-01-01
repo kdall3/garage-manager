@@ -73,11 +73,11 @@ export async function addCar(reg_plate: string, make: string, model: string, yea
   return 'OK';
 };
 
-export type EditCarResult = 'OK' | 'CAR_DOESNT_EXISTS'
-export async function editCarDetails(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string): Promise<EditCarResult> {
-
+export type UpdateCarResult = 'OK' | 'CAR_DOESNT_EXISTS'
+export async function editCarDetails(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string): Promise<UpdateCarResult> {
+  
   if (getCarFromReg(reg_plate) == null) {return 'CAR_DOESNT_EXISTS'}
-
+  
   await db.query(
     `
     UPDATE cars
@@ -86,11 +86,13 @@ export async function editCarDetails(reg_plate: string, make: string, model: str
     `,
     [make, model, year, mileage, colour, damage, description, status, reg_plate]
   );
-
+  
   return 'OK';
 };
 
-export async function sellCar(reg_plate: string, price: number, platform: string, sale_date: Date): Promise<void> {
+export async function sellCar(reg_plate: string, price: number, platform: string, sale_date: Date): Promise<UpdateCarResult> {
+
+  if (getCarFromReg(reg_plate) == null) {return 'CAR_DOESNT_EXISTS'}
 
   await db.query(
     `
@@ -108,4 +110,6 @@ export async function sellCar(reg_plate: string, price: number, platform: string
     `,
     [reg_plate, price, platform, sale_date]
   );
+
+  return 'OK';
 };
