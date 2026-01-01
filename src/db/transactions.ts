@@ -14,7 +14,7 @@ export async function getLatestTransactions(
 ): Promise<Transaction[]> {
   const [rows] = await db.query<Transaction>(
     `
-    SELECT reg_plate, title, price, date, platform
+    SELECT transactionID, reg_plate, title, price, date, platform
     FROM transactions
     ORDER BY date DESC
     LIMIT ?
@@ -51,4 +51,14 @@ export async function carProfitLossByReg(reg_plate: string): Promise<number> {
   );
 
   return rows[0]?.profit_loss ?? 0;
+}
+
+export async function delTransaction(transactionID: number): Promise<void> {
+  await db.query(
+    `
+    DELETE FROM transactions
+    WHERE transactionID=?
+    `,
+    [transactionID]
+  );
 }

@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import { requireLogin } from "../middleware/requireLogin";
 import { getLatestTransactions } from "../db/transactions";
 import { addTransaction } from "../db/transactions";
+import { delTransaction } from "../db/transactions";
 
 export const transactionsRouter = express.Router();
 
@@ -13,6 +14,15 @@ transactionsRouter
             transactions
         });
     })
+    .post(requireLogin, async (req: Request, res: Response) => {
+        const id = Number(req.body.id);
+
+        await delTransaction(id);
+
+        res.redirect("/transactions");
+
+        }
+    );
 
 transactionsRouter
     .route('/add')  

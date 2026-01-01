@@ -32,6 +32,12 @@
                         <td><%= t.title %></td>
                         <td>£<%= t.price.toFixed(2) %></td>
                         <td><%= t.platform ?? "-" %></td>
+                        <td>
+                            <form action="/transactions/" method="POST" onsubmit="return confirm('Delete this transaction?');">
+                                <input type="hidden" name="id" value="<%= t.transactionID %>">
+                                <button class="transaction-rm" type="submit">✕</button>
+                            </form>
+                        </td>
                     </tr>
                     <% }) %>
                 </tbody>

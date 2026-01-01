@@ -319,7 +319,7 @@ table.transactions-table thead {
 
 table.transactions-table th,
 table.transactions-table td {
-  padding: 14px 16px;
+  padding: 8px 16px;
   text-align: left;
 }
 
@@ -337,6 +337,27 @@ table.transactions-table td {
 
 table.transactions-table tbody tr:hover {
   background: #262626;
+}
+
+button.transaction-rm {
+  font-size: 1rem;
+
+  width: 40px;
+  height: 40px;
+
+  margin-top: 1px;
+  padding: 0px;
+
+  background: transparent;
+  color: #f44336;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+button.transaction-rm:hover {
+  color: #ff2f0a;
+  background: #760000;
 }
 
 p.profit-loss-bar {
