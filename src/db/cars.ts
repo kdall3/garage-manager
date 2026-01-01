@@ -14,7 +14,11 @@ export interface Car {
 
 export async function getCarFromReg(reg_plate: string): Promise<Car | null> {
     const [rows, fields] = await db.query<Car>(
-        'SELECT reg_plate, make, model, year, mileage, colour, damage, description, status FROM cars WHERE reg_plate = ?',
+        `
+        SELECT reg_plate, make, model, year, mileage, colour, damage, description, status 
+        FROM cars 
+        WHERE reg_plate = ?
+        `,
         [reg_plate]
     )
 
@@ -47,18 +51,61 @@ export async function getCars(): Promise<Car[]> {
 
 export type AddCarResult = 'OK' | 'CAR_ALREADY_EXISTS'
 export async function addCar(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string, buy_price: number, platform: string, buy_date: Date): Promise<AddCarResult> {
-
+  
   if (getCarFromReg(reg_plate) != null) {return 'CAR_ALREADY_EXISTS'}
+  
+  await db.query(
+    `
+    INSERT INTO cars (reg_plate, make, model, year, mileage, colour, damage, description, status) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `,
+    [reg_plate, make, model, year, mileage, colour, damage, description, status]
+  )
+  
+  await db.query(
+    `
+    INSERT INTO transactions (reg_plate, title, price, platform, date) 
+    VALUES (?, "Car", ?, ?, ?)
+    `,
+    [reg_plate, buy_price, platform, buy_date]
+  )
+  
+  return 'OK';
+};
+
+export type EditCarResult = 'OK' | 'CAR_DOESNT_EXISTS'
+export async function editCarDetails(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string): Promise<EditCarResult> {
+
+  if (getCarFromReg(reg_plate) == null) {return 'CAR_DOESNT_EXISTS'}
 
   await db.query(
-      'INSERT INTO cars (reg_plate, make, model, year, mileage, colour, damage, description, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [reg_plate, make, model, year, mileage, colour, damage, description, status]
-  )
+    `
+    UPDATE cars
+    SET make = ?, model = ?, year = ?, mileage = ?, colour = ?, damage = ?, description = ?, status = ?
+    WHERE reg_plate = ?
+    `,
+    [make, model, year, mileage, colour, damage, description, status, reg_plate]
+  );
+
+  return 'OK';
+};
+
+export async function sellCar(reg_plate: string, price: number, platform: string, sale_date: Date): Promise<void> {
 
   await db.query(
-      'INSERT INTO transactions (reg_plate, title, price, platform, date) VALUES (?, "Car", ?, ?, ?)',
-      [reg_plate, buy_price, platform, buy_date]
-  )
+    `
+    UPDATE cars
+    SET status = "Sold"
+    WHERE reg_plate = ?
+    `,
+    [reg_plate]
+  );
 
-  return 'OK'
-  };
+  await db.query(
+    `
+    INSERT INTO transactions (reg_plate, title, price, platform, date) 
+    VALUES (?, "Car", ?, ?, ?)
+    `,
+    [reg_plate, price, platform, sale_date]
+  );
+};

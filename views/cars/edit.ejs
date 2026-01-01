@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head") %>
+
+<body>
+
+    <%- include("../partials/profile-button") %>
+
+    <h1 class="subheader">Edit Car</h1>
+
+    <form action="/cars/edit" method="POST">
+        <%- include("../partials/field", {
+            label: "Car Registration",
+            name: "reg_plate",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Make",
+            name: "make",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Model",
+            name: "model",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Year",
+            name: "year",
+            type: "int",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Mileage",
+            name: "mileage",
+            type: "int",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Colour",
+            name: "colour",
+            type: "text",
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Damage",
+            name: "damage",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field-textarea", {
+            label: "Description",
+            name: "description",
+            rows: 3,
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Status",
+            name: "status",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <p class="success-message">
+            <%= success_message ?? "" %>
+        </p>
+
+        <button type="submit">Edit Car</button>
+
+    <%- include("../partials/footer") %>
+
+</body>
+</html>
