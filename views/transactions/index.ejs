@@ -16,35 +16,35 @@
                 <th>Title</th>
                 <th>Price</th>
                 <th>Platform</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <% if (transactions.length === 0) { %>
-                <tr>
-                    <td colspan="5">No transactions found</td>
-                </tr>
-                <% } %>
-                
-                <% transactions.forEach(t => { %>
-                    <tr>
-                        <td><%= new Date(t.date).toLocaleDateString() %></td>
-                        <td><%= t.reg_plate %></td>
-                        <td><%= t.title %></td>
-                        <td>£<%= t.price.toFixed(2) %></td>
-                        <td><%= t.platform ?? "-" %></td>
-                        <td>
-                            <form action="/transactions/" method="POST" onsubmit="return confirm('Delete this transaction?');">
-                                <input type="hidden" name="id" value="<%= t.transactionID %>">
-                                <button class="transaction-rm" type="submit">✕</button>
-                            </form>
-                        </td>
-                    </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-
+            <tr>
+                <td colspan="5">No transactions found</td>
+            </tr>
+            <% } %>
+            
+            <% transactions.forEach(t => { %>
+            <tr>
+                <td><%= new Date(t.date).toLocaleDateString() %></td>
+                <td><%= t.reg_plate %></td>
+                <td><%= t.title %></td>
+                <td>£<%= t.price.toFixed(2) %></td>
+                <td><%= t.platform ?? "-" %></td>
+                <td>
+                    <form class="delete-form" action="/transactions/" method="POST" onsubmit="return confirm('Delete this transaction?');">
+                        <input type="hidden" name="id" value="<%= t.transactionID %>">
+                        <button class="delete-button" type="submit">✕</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    
     <button type="button" onclick="location.href='/transactions/add'">Add Transaction</button>
-
 
     <%- include("../partials/footer") %>
 </body>

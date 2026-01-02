@@ -9,9 +9,7 @@ export interface Transaction {
   platform: string | null;
 }
 
-export async function getLatestTransactions(
-  limit = 20
-): Promise<Transaction[]> {
+export async function getLatestTransactions(limit = 20): Promise<Transaction[]> {
   const [rows] = await db.query<Transaction>(
     `
     SELECT transactionID, reg_plate, title, price, date, platform

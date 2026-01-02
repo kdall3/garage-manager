@@ -27,21 +27,6 @@ h2.subheader {
   padding-bottom: 8px;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 85vh;
-
-  color: #f1f1f1;
-  background-color: #1a1a1a;
-}
-
 button {
   margin-top: 16px;
   padding: 14px 16px;
@@ -64,6 +49,22 @@ button {
     transform 0.15s ease,
     box-shadow 0.15s ease,
     background-color 0.15s ease;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 92vh;
+
+  color: #f1f1f1;
+  background-color: #1a1a1a;
+
 }
 
 /* #region Profile button */
@@ -302,15 +303,16 @@ div.shift:hover div.shift-label span.extra-info {
 
 /* === Transactions Page === */
 
+
 table.transactions-table {
-  width: 100%;
-  max-width: 1000px;
   margin: 24px auto;
   border-collapse: collapse;
   background: #1e1e1e;
   border-radius: 12px;
-  overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  display: block;
+  overflow-y: auto;
 }
 
 table.transactions-table thead {
@@ -324,28 +326,42 @@ table.transactions-table td {
 }
 
 table.transactions-table th {
-  font-size: 0.85rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #bbb;
 }
 
 table.transactions-table td {
+  font-size: 1.25rem;
   color: #eee;
   border-top: 1px solid #2f2f2f;
+  padding: 0px 16px;
 }
 
 table.transactions-table tbody tr:hover {
   background: #262626;
 }
 
-button.transaction-rm {
+
+form.delete-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding: 10px;
+  display: inline-block;
+  width: 0px;
+  margin: 0px 25px 0px 0px;
+}
+
+button.delete-button {
   font-size: 1rem;
 
   width: 40px;
   height: 40px;
 
-  margin-top: 1px;
+  margin: 0px;
   padding: 0px;
 
   background: transparent;
@@ -353,11 +369,11 @@ button.transaction-rm {
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
-}
+}  
 
-button.transaction-rm:hover {
-  color: #ff2f0a;
-  background: #760000;
+button.delete-button:hover {
+  color: #910000;
+  background: #ff2f0a;
 }
 
 p.profit-loss-bar {
