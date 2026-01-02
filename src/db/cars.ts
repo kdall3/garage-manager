@@ -52,7 +52,7 @@ export async function getCars(): Promise<Car[]> {
 export type AddCarResult = 'OK' | 'CAR_ALREADY_EXISTS'
 export async function addCar(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string, buy_price: number, platform: string, buy_date: Date): Promise<AddCarResult> {
   
-  if (getCarFromReg(reg_plate) != null) {return 'CAR_ALREADY_EXISTS'}
+  if (getCarFromReg(reg_plate) == null) {return 'CAR_ALREADY_EXISTS'}
   
   await db.query(
     `
