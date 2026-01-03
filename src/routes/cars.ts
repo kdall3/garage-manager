@@ -7,6 +7,7 @@ import { addCar } from "../db/cars";
 import { editCarDetails } from "../db/cars";
 import { sellCar } from "../db/cars";
 import { hoursPerCar } from "../db/hours";
+import { hoursPerEmployee } from "../db/hours";
 
 export const carsRouter = express.Router();
 
@@ -50,7 +51,7 @@ carsRouter
     );
 
 carsRouter
-    .route('/edit')
+    .route('/:reg_plate/edit')
     .get(requireLogin, async (req: Request, res: Response) => {
 
         req.session.form_values ??= {};
@@ -98,7 +99,7 @@ carsRouter
     );
 
 carsRouter
-    .route('/sell')
+    .route('/:reg_plate/sell')
     .get(requireLogin, async (req: Request, res: Response) => {
 
         req.session.form_values ??= {};
@@ -129,6 +130,33 @@ carsRouter
             }
         }}
     );
+
+
+
+carsRouter
+    .route("/:reg_plate/hours")    
+    .get(requireLogin, async (req: Request, res: Response) => {
+
+    const cars = await getCars();
+    const carHours = await hoursPerCar();
+
+    const { reg_plate } = req.params;
+    
+    if (typeof reg_plate === 'string') {
+        const hoursWorked = await hoursPerEmployee(reg_plate);
+
+        res.render("cars/hours-stats", {
+            reg_plate,
+            hoursWorked
+        });
+    } else {
+        res.render("cars", {
+            cars,
+            carHours
+        });
+    }
+  }
+);
 
 carsRouter
     .route("/:reg_plate")    

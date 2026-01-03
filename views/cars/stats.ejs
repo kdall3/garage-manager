@@ -3,38 +3,38 @@
 <%- include("../partials/head") %>
 
 <body>
-<%- include("../partials/profile-button") %>
+  <%- include("../partials/profile-button") %>
 
-<h1 class="subheader"><%= car.reg_plate %></h1>
+  <h1 class="subheader"><%= car.reg_plate %></h1>
 
-<div class="car-stats">
+  <div class="car-stats">
 
-  <div class="stat-card" onclick="location.href='/cars/edit?reg_plate=<%= encodeURIComponent(car.reg_plate) %>'">
-    <h3>Car Details</h3>
-    <p><strong><%= car.make %> <%= car.model %></strong></p>
-    <p><%= car.year %> • <%= car.mileage %> miles</p>
-    <p><%= car.colour %></p>
-    <p><%= car.damage %></p>
-    <p><%= car.description %></p>
-    <p>Status: <%= car.status %></p>
+    <div class="stat-card" onclick="location.href='/cars/<%= car.reg_plate %>/edit'">
+      <h3>Car Details</h3>
+      <p><strong><%= car.make %> <%= car.model %></strong></p>
+      <p><%= car.year %> • <%= car.mileage %> miles</p>
+      <p><%= car.colour %></p>
+      <p><%= car.damage %></p>
+      <p><%= car.description %></p>
+      <p>Status: <%= car.status %></p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Profit / Loss</h3>
+      <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= profitLoss %></p>
+    </div>
+
+    <div class="stat-card" onclick="location.href='<%= car.reg_plate %>/hours'">
+      <h3>Total Hours</h3>
+      <p><%= hoursWorked.get(car.reg_plate) %> hrs</p>
+    </div>
+
   </div>
 
-  <div class="stat-card">
-    <h3>Profit / Loss</h3>
-    <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= profitLoss %></p>
-  </div>
+  <button type="button" onclick="location.href='/hours/add?reg_plate=<%= encodeURIComponent(car.reg_plate) %>'">Add Hours</button>
+  <button type="button" onclick="location.href='/cars/<%= car.reg_plate %>/sell'">Set Sold</button>
 
-  <div class="stat-card">
-    <h3>Total Hours</h3>
-    <p><%= hoursWorked.get(car.reg_plate) %> hrs</p>
-  </div>
-
-</div>
-
-<button type="button" onclick="location.href='/hours/add?reg_plate=<%= encodeURIComponent(car.reg_plate) %>'">Add Hours</button>
-<button type="button" onclick="location.href='/cars/sell?reg_plate=<%= encodeURIComponent(car.reg_plate) %>'">Set Sold</button>
-
-<%- include("../partials/footer") %>
+  <%- include("../partials/footer") %>
 
 </body>
 </html>

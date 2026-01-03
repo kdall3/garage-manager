@@ -30,6 +30,13 @@ interface Shift {
     notes: string
 }
 
+export interface EmployeeHours {
+  employee_id: number;
+  first_name: string;
+  last_name: string;
+  total_hours: number;
+}
+
 // Total hours worked for each reg plate
 export interface CarHours {
     reg_plate: string;
@@ -108,4 +115,28 @@ export async function hoursPerCar(): Promise<Map<string, number>> {
     );
 
     return hoursMap;
+}
+
+export async function hoursPerEmployee(reg_plate: string): Promise<EmployeeHours[]> {
+    const [rows] = await db.query<EmployeeHours>(
+    `
+    SELECT
+        e.employee_id AS employee_id,
+        e.first_name,
+        e.last_name,
+        ROUND(SUM(TIMESTAMPDIFF(MINUTE, h.start, h.end)) / 60, 2) AS total_hours
+    FROM hours h
+    JOIN employees e
+        ON e.employee_id = h.employee_id
+    WHERE h.reg_plate = ?
+    GROUP BY
+        e.employee_id,
+        e.first_name,
+        e.last_name
+    ORDER BY total_hours DESC;
+    `,
+    [reg_plate]
+    );
+
+    return rows;
 }

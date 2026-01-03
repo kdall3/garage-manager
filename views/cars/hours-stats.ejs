@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head") %>
+
+<body>
+  
+  <%- include("../partials/profile-button") %>
+  <%- include("../partials/back-button") %>
+
+  <h1 class="subheader">
+    Hours worked — <%= reg_plate %>
+  </h1>
+
+  <table class="hours-table">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Total Hours</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (hoursWorked.length === 0) { %>
+        <tr>
+          <td colspan="2">No hours logged for this car</td>
+        </tr>
+      <% } %>
+
+      <% hoursWorked.forEach(h => { %>
+        <tr>
+          <td><%= h.employee_id %></td>
+          <td><%= h.first_name %></td>
+          <td><%= h.last_name %></td>
+          <td><%= h.total_hours %> hrs</td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <%- include("../partials/footer") %>
+</body>
+</html>
