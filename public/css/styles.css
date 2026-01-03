@@ -377,6 +377,10 @@ input.tiny-date {
 
 /* #region Dashboard */
 
+/* #endregion */
+
+/* #region Cars */
+
 form.delete-form {
   display: flex;
   flex-direction: column;
@@ -455,9 +459,30 @@ a.car-card:hover {
 
 .car-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-areas:
+    "finance-stats hours-stats"
+    "set-sold add-hours";
   gap: 20px;
   margin-top: 20px;
+}
+
+.car-stats button.set-sold { grid-area: set-sold; }
+.car-stats button.add-hours { grid-area: add-hours; }
+
+.car-stats .finance-stats {
+  grid-area: finance-stats;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.car-stats .hours-stats {
+  grid-area: hours-stats;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
 
 .stat-card {
