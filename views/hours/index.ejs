@@ -7,7 +7,14 @@
     <%- include("../partials/profile-button") %>
 
     <h1 class="subheader">Shift Calendar</h1>
-    <%- date === null ? '' : `<h2 class="subheader">${date.toDateString()}</h2>` %>
+
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <%- date === null ? 'No date selected' : `<h2 class="subheader-no-pad">${date.toDateString()}</h2>` %>
+
+        <form action="/hours/" method="get" class="tiny-form-right">
+            <input class="tiny-date" type="date" name="date" onchange="this.form.submit()">
+        </form>
+    </div>
 
     <% if (shift_list != null && date) { %>
         <% let next_date = new Date(new Date(date).setDate(date.getDate() + 1)); %>
@@ -21,18 +28,9 @@
         %>
     <% } %>
 
-    <form action="/hours/" method="get">
-        <%- include("../partials/field", {
-            label: "Date",
-            name: "date",
-            type: "date",
-            required: true,
-            form_values,
-            input_errors
-        }) %>
-
-        <button type="submit">Display Shifts</button>
-    </form>
+    <%-
+    `<button onclick="location.href='/hours/add?date=${date.toISOString().split('T')[0]}'">Add New Shift</button>`
+    %>
 
     <%- include("../partials/footer") %>
 </body>
