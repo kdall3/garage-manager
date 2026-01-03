@@ -89,9 +89,9 @@ carsRouter
                 req.session.success_message = 'Successfully edited car.';
                 return res.redirect(req.originalUrl);
             }
-            case 'CAR_DOESNT_EXISTS': {
+            case 'CAR_DOESNT_EXIST': {
                 req.session.input_errors ??= {};
-                req.session.input_errors['reg_plate'] = 'Car registration doesnt exists in database.';
+                req.session.input_errors['reg_plate'] = 'Car registration doesnt exist in database.';
                 req.session.form_values = { ...req.body };
                 return res.redirect(req.originalUrl);
             }
@@ -104,8 +104,8 @@ carsRouter
 
         req.session.form_values ??= {};
 
-        if (typeof req.query['reg_plate'] === 'string') {
-            req.session.form_values['reg_plate'] = req.query['reg_plate'];
+        if (typeof req.params['reg_plate'] === 'string') {
+            req.session.form_values['reg_plate'] = req.params['reg_plate'];
         }
         
         res.render("cars/sell", {
@@ -122,9 +122,9 @@ carsRouter
                 req.session.success_message = 'Successfully edited car.';
                 return res.redirect(req.originalUrl);
             }
-            case 'CAR_DOESNT_EXISTS': {
+            case 'CAR_DOESNT_EXIST': {
                 req.session.input_errors ??= {};
-                req.session.input_errors['reg_plate'] = 'Car registration doesnt exists in database.';
+                req.session.input_errors['reg_plate'] = 'Car registration doesnt exist in database.';
                 req.session.form_values = { ...req.body };
                 return res.redirect(req.originalUrl);
             }
