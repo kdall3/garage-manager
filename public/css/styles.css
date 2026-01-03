@@ -141,6 +141,7 @@ button.back-button {
 /* #region Footer */
 
 div.footer-box {
+  background-color: #1a1a1a;
   position: fixed;
   bottom: 0;
   left: 0;
