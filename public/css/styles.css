@@ -59,6 +59,11 @@ button {
     background-color 0.15s ease;
 }
 
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.3);
+}
+
 table {
   margin: 24px auto;
   border-collapse: collapse;
@@ -491,10 +496,12 @@ a.car-card:hover {
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(0,0,0,0.4);
 }
 
