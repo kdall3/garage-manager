@@ -1,30 +1,30 @@
 import { db } from ".";
 
 export interface Car {
-    reg_plate: string;
-    make: string;
-    model: string;
-    year: number;
-    mileage: number;
-    colour: number;
-    damage: string;
-    description: string;
-    status: string;
+  reg_plate: string;
+  make: string;
+  model: string;
+  year: number;
+  mileage: number;
+  colour: number;
+  damage: string;
+  description: string;
+  status: string;
 }
 
 export async function getCarFromReg(reg_plate: string): Promise<Car | null> {
-    const [rows, fields] = await db.query<Car>(
-        `
-        SELECT reg_plate, make, model, year, mileage, colour, damage, description, status 
-        FROM cars 
-        WHERE reg_plate = ?
-        `,
-        [reg_plate]
-    )
+  const [rows, fields] = await db.query<Car>(
+    `
+    SELECT reg_plate, make, model, year, mileage, colour, damage, description, status 
+    FROM cars 
+    WHERE reg_plate = ?
+    `,
+    [reg_plate]
+  )
 
-    if (rows.length === 1) { return rows[0] ?? null; }
+  if (rows.length === 1) { return rows[0] ?? null; }
 
-    return null;
+  return null;
 }
 
 export async function getCars(): Promise<Car[]> {
@@ -72,9 +72,9 @@ export async function addCar(reg_plate: string, make: string, model: string, yea
   return 'OK';
 };
 
-export async function editCarDetails(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string): Promise<'OK' | 'CAR_DOESNT_EXISTS'> {
+export async function editCarDetails(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string): Promise<'OK' | 'CAR_DOESNT_EXIST'> {
   
-  if (getCarFromReg(reg_plate) == null) {return 'CAR_DOESNT_EXISTS'}
+  if (getCarFromReg(reg_plate) == null) {return 'CAR_DOESNT_EXIST'}
   
   await db.query(
     `
@@ -88,9 +88,9 @@ export async function editCarDetails(reg_plate: string, make: string, model: str
   return 'OK';
 };
 
-export async function sellCar(reg_plate: string, price: number, platform: string, sale_date: Date): Promise<'OK' | 'CAR_DOESNT_EXISTS'> {
+export async function sellCar(reg_plate: string, price: number, platform: string, sale_date: Date): Promise<'OK' | 'CAR_DOESNT_EXIST'> {
 
-  if (getCarFromReg(reg_plate) == null) {return 'CAR_DOESNT_EXISTS'}
+  if (getCarFromReg(reg_plate) == null) {return 'CAR_DOESNT_EXIST'}
 
   await db.query(
     `

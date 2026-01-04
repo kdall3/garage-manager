@@ -3,6 +3,22 @@ import { requireLogin } from "../middleware/requireLogin";
 import { addShift } from "../db/hours";
 import { getShiftsOnDate } from "../db/hours";
 
+const parseDate = (date_str: string): Date | null => {
+    let date: Date | null = new Date(date_str);
+    if (isNaN(date.getTime())) { date = null; }
+
+    return date;
+}
+
+
+const getDateString = (date: Date): string => {
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // months are 0-based
+    const dd = String(date.getDate()).padStart(2, '0');
+
+    return `${yyyy}-${mm}-${dd}`
+}
+
 export const hoursRouter = express.Router();
 hoursRouter.use(requireLogin);
 
@@ -10,26 +26,23 @@ hoursRouter
     .route('/')
     .get(async (req: Request, res: Response) => {
         // Get date GET argument
-        const date_str = req.query['date'] as string
+        const date_str = req.query['date'] as string;
         let date: Date | null = null;
 
         // Parse date if exists
         if (date_str) {
-            date = new Date(date_str)
+            date = new Date(date_str);
             if (isNaN(date.getTime())) { date = null; }
         } else {
             const date = new Date(); // today's date
+            const date_str = getDateString(date)
 
-            const yyyy = date.getFullYear();
-            const mm = String(date.getMonth() + 1).padStart(2, '0'); // months are 0-based
-            const dd = String(date.getDate()).padStart(2, '0');
-
-            return res.redirect(`/hours/?date=${yyyy}-${mm}-${dd}`)
+            return res.redirect(`/hours/?date=${date_str}`)
         }
 
         // Get shifts if we have a date
         let shift_list = null;
-        if (!date) { date = new Date() }
+        if (!date) { date = new Date(); }
         if (date) {
             shift_list = await getShiftsOnDate(date);
         }
@@ -43,8 +56,9 @@ hoursRouter
 
         // Delete form session vars after we are done rendering them
         delete
+            req.session.form_values,
             req.session.input_errors,
-            req.session.success_message
+            req.session.success_message;
     })
 
 hoursRouter
@@ -53,9 +67,19 @@ hoursRouter
 
         req.session.form_values ??= {};
         
-        // If reg_plate is in query, prefill it
+        // Pre-fill get parameters
         if (typeof req.query['reg_plate'] === 'string') {
             req.session.form_values['reg_plate'] = req.query['reg_plate'];
+        }
+        
+        if (typeof req.query['date'] === 'string') {
+            let date = parseDate(req.query['date']) 
+            if (date === null) {
+                console.warn(`Invalid date format: ${req.query['date']}`)
+            }
+
+            req.session.form_values['start_time'] = `${req.query['date']}T00:00`
+            req.session.form_values['end_time'] = `${req.query['date']}T00:00`
         }
 
         res.render('hours/add', {
@@ -65,7 +89,10 @@ hoursRouter
         });
 
         // Reset form session vars after we are done rendering them
-        delete req.session.input_errors, req.session.success_message;
+        delete
+            req.session.form_values,
+            req.session.input_errors,
+            req.session.success_message;
     })
     .post(async (req: Request, res: Response) => {
         if (!req.session.user_id) { throw new Error('No session userID'); }
