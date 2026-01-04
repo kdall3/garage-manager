@@ -9,6 +9,21 @@ export interface Transaction {
   platform: string | null;
 }
 
+export async function getTransaction(transaction_id: string): Promise<Transaction | null> {
+  const [rows, fields] = await db.query<Transaction>(
+    `
+    SELECT transactionID, reg_plate, title, price, date, platform
+    FROM transactions
+    WHERE transactionID=?
+    `,
+    [transaction_id]
+  );
+
+  if (rows.length === 1) { return rows[0] ?? null; }
+
+  return null;
+}
+
 export async function getLatestTransactions(limit = 20): Promise<Transaction[]> {
   const [rows] = await db.query<Transaction>(
     `
@@ -24,18 +39,39 @@ export async function getLatestTransactions(limit = 20): Promise<Transaction[]> 
 }
 
 export type AddTransactionResult = 'OK' | 'CAR_NOT_FOUND' 
-export async function addTransaction(title: string, price: number, date: Date, platform: string, reg_plate: string): Promise<AddTransactionResult> {
-    const car = await Promise.all([
-        getCarFromReg(reg_plate),
-    ]);
+export async function addTransaction(title: string, price: number, date: Date, platform: string, reg_plate: string | null): Promise<AddTransactionResult> {
+  
+  if (reg_plate == '') {
+    reg_plate = null
+  } 
 
-    if (car === null) { return 'CAR_NOT_FOUND'; } // Car isn't in database
-
-    await db.query(
-        'INSERT INTO transactions (reg_plate, title, price, platform, date) VALUES (?, ?, ?, ?, ?)',
-        [reg_plate, title, price, platform, date]
-    );
-    return 'OK';
+  await db.query(
+      'INSERT INTO transactions (reg_plate, title, price, platform, date) VALUES (?, ?, ?, ?, ?)',
+      [reg_plate, title, price, platform, date]
+  );
+  return 'OK';
+  }
+  
+export async function delTransaction(transaction_ID: number): Promise<void> {
+  await db.query(
+    `
+    DELETE FROM transactions
+    WHERE transactionID=?
+    `,
+    [transaction_ID]
+  );
+}
+  
+export async function editTransaction(transaction_ID: number, title: string, price: number, date: Date, platform: string, reg_plate: string): Promise<'OK'> {
+  await db.query(
+    `
+    UPDATE transactions
+    SET title=?, price=?, date=?, platform=?, reg_plate=?
+    WHERE transactionID=?
+    `,
+    [title, price, date, platform, reg_plate, transaction_ID]
+  );
+  return 'OK';
 }
 
 export async function carProfitLossByReg(reg_plate: string): Promise<number> {
@@ -49,14 +85,4 @@ export async function carProfitLossByReg(reg_plate: string): Promise<number> {
   );
 
   return rows[0]?.profit_loss ?? 0;
-}
-
-export async function delTransaction(transactionID: number): Promise<void> {
-  await db.query(
-    `
-    DELETE FROM transactions
-    WHERE transactionID=?
-    `,
-    [transactionID]
-  );
 }

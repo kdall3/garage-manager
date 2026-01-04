@@ -27,14 +27,14 @@
             <% } %>
             
             <% transactions.forEach(t => { %>
-            <tr>
+            <tr onclick="location.href='/transactions/edit?transaction_id=<%= encodeURIComponent(t.transactionID) %>'">
                 <td><%= new Date(t.date).toLocaleDateString() %></td>
                 <td><%= t.title %></td>
                 <td><%= t.reg_plate %></td>
                 <td>£<%= t.price.toFixed(2) %></td>
                 <td><%= t.platform ?? "-" %></td>
-                <td>
-                    <form class="delete-form" action="/transactions/" method="POST" onsubmit="return confirm('Delete this transaction?');">
+                <td onclick="event.stopPropagation()">
+                    <form class="delete-form" action="/transactions" method="POST" onsubmit="return confirm('Delete this transaction?');">
                         <input type="hidden" name="id" value="<%= t.transactionID %>">
                         <button class="delete-button" type="submit">✕</button>
                     </form>

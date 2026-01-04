@@ -3,6 +3,8 @@ import { requireLogin } from "../middleware/requireLogin";
 import { getLatestTransactions } from "../db/transactions";
 import { addTransaction } from "../db/transactions";
 import { delTransaction } from "../db/transactions";
+import { editTransaction } from "../db/transactions";
+import { getTransaction } from "../db/transactions";
 
 export const transactionsRouter = express.Router();
 
@@ -48,3 +50,40 @@ transactionsRouter
                 return res.redirect(req.originalUrl)
             }}
         });
+
+transactionsRouter
+    .route('/edit')  
+    .get(requireLogin, async (req: Request, res: Response) => {
+        
+        const transaction_id = req.query['transaction_id'];
+
+        if (typeof transaction_id === "string") {
+            const transaction = await getTransaction(transaction_id);
+            if (transaction) {
+                req.session.form_values = {
+                    title: transaction.title,
+                    price: String(transaction.price),
+                    reg_plate: transaction.reg_plate,
+                    date: transaction.date,
+                    platform: String(transaction.platform)
+                };
+            }
+        }
+
+        res.render("transactions/edit", {
+            form_values: req.session.form_values ?? {},
+            input_errors: req.session.input_errors ?? {},
+            success_message: req.session.success_message ?? ''
+        });
+    })
+    .post(requireLogin, async (req: Request, res: Response) => {
+        if (!req.session.user_id) { throw new Error('No session userID'); }
+  
+            switch (await editTransaction(req.body.transaction_id, req.body.title, req.body.price, new Date(req.body.date), req.body.platform, req.body.reg_plate)) {
+                case 'OK': {
+                    req.session.success_message = 'Successfully edited transaction.';
+                    return res.redirect(req.originalUrl);
+                }   
+            }        
+        }
+    );

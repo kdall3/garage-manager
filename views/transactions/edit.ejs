@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head") %>
+
+<body>
+    <%- include("../partials/profile-button") %>
+
+    <h1 class="subheader">Edit Transaction</h1>
+
+    <form action="/transactions/edit" method="POST">
+        
+        <%- include("../partials/field", {
+            label: "Title",
+            name: "title",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Price",
+            name: "price",
+            type: "int",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Date",
+            name: "date",
+            type: "date",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Platform",
+            name: "platform",
+            type: "text",
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Car Registration",
+            name: "reg_plate",
+            type: "text",
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <p class="success-message">
+            <%= success_message ?? "" %>
+        </p>
+
+        <button type="submit">Edit Transaction</button>
+
+    </form>
+
+    <%- include("../partials/footer") %>
+</body>
+</html> 
