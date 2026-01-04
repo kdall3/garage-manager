@@ -56,7 +56,7 @@ carsRouter
 
         req.session.form_values ??= {};
 
-        const regPlate = req.query['reg_plate'];
+        const regPlate = req.params['reg_plate'];
 
         if (typeof regPlate === "string") {
             const car = await getCarFromReg(regPlate);
