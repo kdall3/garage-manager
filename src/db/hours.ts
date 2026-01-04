@@ -99,16 +99,35 @@ export async function getShiftsOnDate(date: Date): Promise<EmployeeShifts[]> {
     return employee_shifts;
 }
 
-export async function hoursPerCar(): Promise<Map<string, number>> {
-    const [rows] = await db.query<CarHours>(
-    `
-    SELECT
-        reg_plate,
-        ROUND(SUM(TIMESTAMPDIFF(MINUTE, start, end)) / 60, 2) AS total_hours
-    FROM hours
-    GROUP BY reg_plate
-    `
-    );
+export async function hoursPerCar(employee_id?: number): Promise<Map<string, number>> {
+
+    let rows: CarHours[];
+
+    if (!employee_id) {
+        [rows] = await db.query<CarHours>(
+        `
+        SELECT
+            reg_plate,
+            ROUND(SUM(TIMESTAMPDIFF(MINUTE, start, end)) / 60, 2) AS total_hours
+        FROM hours
+        GROUP BY reg_plate
+        `
+        );
+    } else {
+
+        [rows] = await db.query<CarHours>(
+        `
+        SELECT
+            reg_plate,
+            ROUND(SUM(TIMESTAMPDIFF(MINUTE, start, end)) / 60, 2) AS total_hours
+        FROM hours
+        WHERE employee_id=?
+        GROUP BY reg_plate
+        `,
+        [employee_id]
+        );
+    }
+
 
     const hoursMap = new Map(
         rows.map(car => [car.reg_plate, car.total_hours])

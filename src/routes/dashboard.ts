@@ -13,7 +13,7 @@ dashboardRouter
         const cars = await getCars();
         const carsInStock = cars.filter(car => car.status !== 'Sold');
         const activeTasks = await getActiveTasks();
-        const carHours = await hoursPerCar();
+        const carHours = await hoursPerCar(req.session.user_id);
 
         res.render("dashboard", {
             carsInStock,
