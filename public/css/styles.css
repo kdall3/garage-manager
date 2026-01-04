@@ -51,46 +51,6 @@ button {
     background-color 0.15s ease;
 }
 
-table {
-  margin: 24px auto;
-  border-collapse: collapse;
-  background: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-
-  display: block;
-  overflow-y: auto;
-  max-width: 65vh;
-}
-
-table thead {
-  background: #2a2a2a;
-}
-
-table th,
-table td {
-  padding: 8px 16px;
-  text-align: left;
-}
-
-table th {
-  font-size: 1.25rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #bbb;
-}
-
-table td {
-  font-size: 1.25rem;
-  color: #eee;
-  border-top: 1px solid #2f2f2f;
-  padding: 0px 16px;
-}
-
-table tbody tr:hover {
-  background: #262626;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -352,7 +312,47 @@ div.shift:hover div.shift-label span.extra-info {
 
 /* #endregion */
 
-/* #region Dashboard */
+/* #region Transactions */
+
+table.table-card {
+  margin: 24px auto;
+  border-collapse: collapse;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  display: block;
+  overflow-y: auto;
+  max-width: 65vh;
+}
+
+table.table-card thead {
+  background: #2a2a2a;
+}
+
+table.table-card th,
+table.table-card td {
+  padding: 8px 16px;
+  text-align: left;
+}
+
+table.table-card th {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #bbb;
+}
+
+table.table-card td {
+  font-size: 1.25rem;
+  color: #eee;
+  border-top: 1px solid #2f2f2f;
+  padding: 0px 16px;
+}
+
+table.table-card tbody tr:hover {
+  background: #262626;
+}
 
 form.delete-form {
   display: flex;
@@ -384,6 +384,52 @@ button.delete-button {
 button.delete-button:hover {
   color: #910000;
   background: #ff2f0a;
+}
+
+/* #endregion */
+
+/* #region Dashboard */
+
+div.to_do_list {
+  background: #1e1e1e;
+  margin: 20px;
+  border-radius: 12px;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+div.to_do_list h3 {
+  font-size: 1.5rem;
+}
+
+div.to_do_list table {
+  margin: 24px;
+  border-collapse: collapse;
+  background: #1e1e1e;
+  border-radius: 0px;
+  box-shadow: 0 0px rgba(0, 0, 0, 0);
+  
+  display: block;
+  overflow-y: auto;
+}
+
+div.to_do_list table td {
+  padding: 8px 16px;
+}
+div.to_do_list table th {
+  padding: 8px 16px;
+}
+
+form.toggle-form input[type="checkbox"] {
+  padding: 0px 0px;
+  margin: 0px 0px;
+  width: 23px;
+  height: 23px;
+  accent-color: #2a2a2a;
+  cursor: pointer;
 }
 
 p.profit-loss-bar {

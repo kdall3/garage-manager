@@ -18,13 +18,51 @@
         <a href="/hours/add?reg_plate=<%= encodeURIComponent(car.reg_plate) %>"class="car-card">
         <h3><%= car.reg_plate %></h3>
         <p><strong><%= car.make %> <%= car.model %></strong></p>
-        <p><%= car.year %> • <%= car.mileage %> miles</p>
-        <p class="status <%= car.status %>"><%= car.status %></p>
         <p>Total Hours: <%= carHours.get(car.reg_plate) %>h</p>
         <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= car.profit_loss %></p>
         </a>
 
     <% }) %>
+    </div>
+
+    <div class="to_do_list">
+        <h3>To-Do List</h3>
+
+        <table class="table-card">
+        <thead>
+            <tr>
+                <th style="padding: 0px 0px"></th>
+                <th style="width: 100vh">Task</th>
+                <th style="width: 25vh">Reg Plate</th>
+                <th>Priority</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (activeTasks.length === 0) { %>
+            <tr>
+                <td colspan="5">No active tasks found</td>
+            </tr>
+            <% } %>
+            
+            <% activeTasks.forEach(t => { %>
+            <tr>
+                <td style="padding: 0px 0px">
+                    <form action="/dashboard/" method="POST" class="toggle-form">
+                    <input type="hidden" name="task_id" value="<%= t.task_id %>">
+
+                    <input type="checkbox" name="active" <%= !t.active ? "checked" : "" %> onchange="this.form.submit()">
+                    </form>
+                </td>
+                <td><%= t.task %></td>
+                <td><%= t.reg_plate %></td>
+                <td class="priority">
+                    <%= t.priority %>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
     </div>
 
     <%- include("../partials/footer") %>
