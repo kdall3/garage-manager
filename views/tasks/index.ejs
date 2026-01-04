@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head") %>
+
+<body>
+
+    <%- include("../partials/profile-button") %>
+
+    <h1 class="subheader">To Do List</h1>
+
+    <div class="to_do_list">
+
+        <table class="table-card">
+        <thead>
+            <tr>
+                <th style="padding: 0px 0px"></th>
+                <th style="width: 100vh">Task</th>
+                <th style="width: 25vh">Reg Plate</th>
+                <th>Priority</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (activeTasks.length === 0) { %>
+            <tr>
+                <td colspan="5">No active tasks found</td>
+            </tr>
+            <% } %>
+            
+            <% activeTasks.forEach(t => { %>
+            <tr>
+                <td style="padding: 0px 0px">
+                    <form action="/tasks/" method="POST" class="toggle-form">
+                    <input type="hidden" name="task_id" value="<%= t.task_id %>">
+
+                    <input type="checkbox" name="active" <%= !t.active ? "checked" : "" %> onchange="this.form.submit()">
+                    </form>
+                </td>
+                <td><%= t.task %></td>
+                <td><%= t.reg_plate %></td>
+                <td class="priority">
+                    <%= t.priority %>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    </div>
+
+    <button onclick="location.href='/tasks/add'">Add Task</button>
+
+    <%- include("../partials/footer") %>
+
+</body>
+</html>

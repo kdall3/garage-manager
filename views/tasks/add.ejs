@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head") %>
+
+<body>
+    <%- include("../partials/profile-button") %>
+
+    <h1 class="subheader">Add Task</h1>
+
+    <form action="/tasks/add" method="POST">
+        
+        <%- include("../partials/field", {
+            label: "Task",
+            name: "task",
+            type: "text",
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Car Registration",
+            name: "reg_plate",
+            type: "text",
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Priority",
+            name: "priority",
+            type: "int",
+            required: false,
+            form_values,
+            input_errors
+        }) %>
+
+        <p class="success-message">
+            <%= success_message ?? "" %>
+        </p>
+
+        <button type="submit">Add Task</button>
+
+    </form>
+
+    <%- include("../partials/footer") %>
+</body>
+</html> 

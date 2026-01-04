@@ -10,7 +10,20 @@ export interface Task {
     priority: number  
 }
 
-export async function getActiveTasks(reg_plate?: string): Promise<Task[]> {
+export async function getActiveTasks(): Promise<Task[]> {
+
+    const [rows] = await db.query<Task>(
+        `
+        SELECT task_id, task, reg_plate, priority, active
+        FROM tasks
+        WHERE active=TRUE
+        ORDER BY active DESC, priority
+        `
+    );
+    return rows;
+}
+
+export async function getAllTasks(reg_plate?: string): Promise<Task[]> {
     if(!reg_plate) {
         const [rows] = await db.query<Task>(
             `
@@ -56,4 +69,15 @@ export async function toggleActive(task_id: number, active: boolean): Promise<vo
     );
     }
     
+}
+
+export async function addTask(task: string, reg_plate: string, priority: number): Promise<'OK'> {
+    await db.query(
+        `
+        INSERT INTO tasks(task, reg_plate, priority)
+        VALUES (?, ?, ?)
+        `,
+        [task, reg_plate, priority]
+    )
+    return 'OK'
 }

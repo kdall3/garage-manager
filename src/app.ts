@@ -36,4 +36,7 @@ app.use('/dashboard', dashboardRouter);
 import { carsRouter } from './routes/cars';
 app.use('/cars', carsRouter);
 
+import { tasksRouter } from './routes/tasks';
+app.use('/tasks', tasksRouter);
+
 app.listen(3000);
