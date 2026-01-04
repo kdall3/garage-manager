@@ -7,18 +7,15 @@
 
     <%- include("../partials/profile-button") %>
 
-    <h1 class="subheader">To Do List</h1>
+    <h1 class="subheader">To-Do List</h1>
 
-    <div class="to_do_list">
-
-        <table class="table-card">
+    <table class="table-card">
         <thead>
             <tr>
-                <th style="padding: 0px 0px"></th>
+                <th style="padding: 0px 0px; width: 100px"></th>
                 <th style="width: 100vh">Task</th>
                 <th style="width: 25vh">Reg Plate</th>
                 <th>Priority</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +26,7 @@
             <% } %>
             
             <% activeTasks.forEach(t => { %>
-            <tr>
+            <tr class="task-row <%= t.active ? '' : 'task-complete' %>">
                 <td style="padding: 0px 0px">
                     <form action="/tasks/" method="POST" class="toggle-form">
                     <input type="hidden" name="task_id" value="<%= t.task_id %>">
@@ -39,14 +36,11 @@
                 </td>
                 <td><%= t.task %></td>
                 <td><%= t.reg_plate %></td>
-                <td class="priority">
-                    <%= t.priority %>
-                </td>
+                <td style="text-align: center;"><%= t.priority %></td>
             </tr>
             <% }) %>
         </tbody>
     </table>
-    </div>
 
     <button onclick="location.href='/tasks/add'">Add Task</button>
 

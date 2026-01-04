@@ -15,7 +15,7 @@
     <% } %>
 
     <% carsInStock.forEach(car => { %>
-        <a href="/hours/add?reg_plate=<%= encodeURIComponent(car.reg_plate) %>"class="car-card">
+        <a href="/hours/add?reg_plate=<%= encodeURIComponent(car.reg_plate) %>" class="card">
         <h3><%= car.reg_plate %></h3>
         <p><strong><%= car.make %> <%= car.model %></strong></p>
         <p>Hours: <%= carHours.get(car.reg_plate) %>h</p>
@@ -25,10 +25,8 @@
     <% }) %>
     </div>
 
-    <div class="to_do_list">
-        <h3>To-Do List</h3>
 
-        <table class="table-card">
+    <table class="table-card">
         <thead>
             <tr>
                 <th style="padding: 0px 0px"></th>
@@ -60,7 +58,6 @@
             <% }) %>
         </tbody>
     </table>
-    </div>
 
     <%- include("../partials/footer") %>
 

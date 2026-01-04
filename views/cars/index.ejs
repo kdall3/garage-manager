@@ -12,7 +12,7 @@
     <div class="car-grid">
 
     <% cars.forEach(car => { %>
-        <a href="/cars/<%= encodeURIComponent(car.reg_plate) %>"class="car-card">
+        <a href="/cars/<%= encodeURIComponent(car.reg_plate) %>"class="card">
         <h3><%= car.reg_plate %></h3>
         <p><strong><%= car.make %> <%= car.model %></strong></p>
         <p><%= car.year %> • <%= car.mileage %> miles</p>

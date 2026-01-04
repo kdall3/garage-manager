@@ -76,6 +76,70 @@ body {
   background-color: #1a1a1a;
 }
 
+/* #region Cards */
+
+.card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  text-decoration: none;
+  color: white;
+
+  width: 100%;
+  padding: 16px;
+}
+
+
+table.table-card {
+  font-size: 0.9rem;
+  margin: 16px 0;
+
+  border-collapse: collapse;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  
+  width: 100%;
+
+  display: block;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+table.table-card thead {
+  background: #2a2a2a;
+}
+
+table.table-card th,
+table.table-card td {
+  padding: 8px 16px;
+  text-align: left;
+}
+
+table.table-card th {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #bbb;
+}
+
+table.table-card td {
+  font-size: 1.25rem;
+  color: #eee;
+  border-top: 1px solid #2f2f2f;
+  padding: 7px 16px;
+}
+
+table.table-card tbody tr:hover {
+  background: #262626;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+}
+/* #endregion */
 
 /* #region Profile button */
 a.profile-button {
@@ -190,7 +254,7 @@ div.timeline-wrapper {
   display: flex;
   flex-direction: row;
   width: 100vw;
-  margin: 0 auto;
+  margin: 10 auto;
   padding: 0;
   align-items: center;
   justify-content: center;
@@ -340,66 +404,11 @@ input.tiny-date {
 
 /* #region Transactions */
 
-table.table-card {
-  margin: 24px auto;
-  border-collapse: collapse;
-  background: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  
-  display: block;
-  overflow-y: auto;
-  overflow-x: auto;
-  max-width: 65vh;
-  
-  max-width: 100%;
-  width: 100%;
-  margin: 16px 0;
-  font-size: 0.9rem;
-}
-
-table.table-card thead {
-  background: #2a2a2a;
-}
-
-table.table-card th,
-table.table-card td {
-  padding: 8px 16px;
-  text-align: left;
-}
-
-table.table-card th {
-  font-size: 1.25rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #bbb;
-}
-
-table.table-card td {
-  font-size: 1.25rem;
-  color: #eee;
-  border-top: 1px solid #2f2f2f;
-  padding: 0px 16px;
-}
-
-table.table-card tbody tr:hover {
-  background: #262626;
-}
-
 form.delete-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
-  padding: 10px;
-  display: inline-block;
-  width: 0px;
-  margin: 0px 25px 0px 0px;
+  padding: 10px 0px 10px;
 }
 
 button.delete-button {
-  font-size: 1rem;
-
   min-width: 0px;
   width: 40px;
   height: 40px;
@@ -407,11 +416,8 @@ button.delete-button {
   margin: 0px;
   padding: 0px;
 
-  background: transparent;
   color: #f44336;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
+  font-size: 1.5rem;
 }  
 
 button.delete-button:hover {
@@ -427,45 +433,17 @@ button.delete-button:hover {
 
 /* #endregion */
 
+/* #region Tasks */
+
+tr.task-complete {
+  opacity: 0.45;
+  text-decoration: line-through;
+  background: #1e1e1e;
+}
+
+/* #endregion */
+
 /* #region Dashboard */
-
-div.to_do_list {
-  background: #1e1e1e;
-  margin-top: 20px;
-  border-radius: 12px;
-  padding: 10px;
-  text-decoration: none;
-  color: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-div.to_do_list h3 {
-  font-size: 1.5rem;
-}
-
-div.to_do_list table {
-  margin: 24px;
-  border-collapse: collapse;
-  background: #1e1e1e;
-  border-radius: 0px;
-  box-shadow: 0 0px rgba(0, 0, 0, 0);
-  
-  display: block;
-  overflow-y: auto;
-
-  max-width: 100%;
-  width: 100%;
-  margin: 16px 0;
-  font-size: 0.9rem;
-}
-
-div.to_do_list table td {
-  padding: 8px 16px;
-}
-div.to_do_list table th {
-  padding: 8px 16px;
-}
 
 form.toggle-form input[type="checkbox"] {
   padding: 0px 0px;
@@ -506,21 +484,6 @@ div.car-grid > * {
   flex: 1 0 220px;
 }
 
-a.car-card {
-  background: #1e1e1e;
-  border-radius: 12px;
-  padding: 10px;
-  text-decoration: none;
-  color: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-a.car-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.4);
-}
-
 .car-stats {
   display: grid;
   grid-template-areas:
@@ -547,20 +510,6 @@ a.car-card:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
-}
-
-.stat-card {
-  background: #1e1e1e;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.4);
 }
 
 /* #endregion */

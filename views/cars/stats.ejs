@@ -10,14 +10,14 @@
   <div class="car-stats">
 
     <div class="finance-stats">
-      <div class="stat-card">
+      <div class="card">
         <h3>Profit / Loss</h3>
         <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= profitLoss %></p>
       </div>
     </div>
 
     <div class="hours-stats">
-      <div class="stat-card" onclick="location.href='/cars/<%= car.reg_plate %>/edit'">
+      <a href='/cars/<%= car.reg_plate %>/edit' class="card">
         <h3>Car Details</h3>
         <p><strong><%= car.make %> <%= car.model %></strong></p>
         <p><%= car.year %> • <%= car.mileage %> miles</p>
@@ -25,12 +25,12 @@
         <p><%= car.damage %></p>
         <p><%= car.description %></p>
         <p>Status: <%= car.status %></p>
-      </div>
+      </a>
 
-      <div class="stat-card" onclick="location.href='<%= car.reg_plate %>/hours'">
+      <a href='<%= car.reg_plate %>/hours' class="card">
         <h3>Total Hours</h3>
         <p><%= hoursWorked.get(car.reg_plate) %> hrs</p>
-      </div>
+      </a>
     </div>
 
     <button class="set-sold" type="button" onclick="location.href='/cars/<%= car.reg_plate %>/sell'">Set Sold</button>

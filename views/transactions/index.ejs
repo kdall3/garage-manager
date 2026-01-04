@@ -12,8 +12,8 @@
         <thead>
             <tr>
                 <th>Date</th>
-                <th>Reg</th>
-                <th>Title</th>
+                <th style="width: 100vh">Title</th>
+                <th style="width: 20vh">Reg</th>
                 <th>Price</th>
                 <th>Platform</th>
                 <th></th>
@@ -29,8 +29,8 @@
             <% transactions.forEach(t => { %>
             <tr>
                 <td><%= new Date(t.date).toLocaleDateString() %></td>
-                <td><%= t.reg_plate %></td>
                 <td><%= t.title %></td>
+                <td><%= t.reg_plate %></td>
                 <td>£<%= t.price.toFixed(2) %></td>
                 <td><%= t.platform ?? "-" %></td>
                 <td>

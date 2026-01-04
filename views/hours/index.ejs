@@ -8,25 +8,25 @@
 
     <h1 class="subheader">Shift Calendar</h1>
 
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <%- date === null ? 'No date selected' : `<h2 class="subheader-no-pad">${date.toDateString()}</h2>` %>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <%- date === null ? 'No date selected' : `<h2 class="subheader-no-pad">${date.toDateString()}</h2>` %>
 
-        <form action="/hours/" method="get" class="tiny-form-right">
-            <input class="tiny-date" type="date" name="date" onchange="this.form.submit()">
-        </form>
-    </div>
+            <form action="/hours/" method="get" class="tiny-form-right">
+                <input class="tiny-date" type="date" name="date" onchange="this.form.submit()">
+            </form>
+        </div>
 
-    <% if (shift_list != null && date) { %>
-        <% let next_date = new Date(new Date(date).setDate(date.getDate() + 1)); %>
-        <% let previous_date = new Date(new Date(date).setDate(date.getDate() - 1)); %>
+        <% if (shift_list != null && date) { %>
+            <% let next_date = new Date(new Date(date).setDate(date.getDate() + 1)); %>
+            <% let previous_date = new Date(new Date(date).setDate(date.getDate() - 1)); %>
 
-        <%-
-        include("../partials/shift-timeline", {
-            shift_list,
-            left_redirect: `/hours/?date=${previous_date.toISOString().split('T')[0]}`,
-            right_redirect: `/hours/?date=${next_date.toISOString().split('T')[0]}`})
-        %>
-    <% } %>
+            <%-
+            include("../partials/shift-timeline", {
+                shift_list,
+                left_redirect: `/hours/?date=${previous_date.toISOString().split('T')[0]}`,
+                right_redirect: `/hours/?date=${next_date.toISOString().split('T')[0]}`})
+            %>
+        <% } %>
 
     <%-
     `<button onclick="location.href='/hours/add?date=${date.toISOString().split('T')[0]}'">Add New Shift</button>`

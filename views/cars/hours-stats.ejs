@@ -14,7 +14,7 @@
   <table class="table-card">
     <thead>
       <tr>
-        <th>Employee</th>
+        <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Total Hours</th>
@@ -30,9 +30,9 @@
       <% hoursWorked.forEach(h => { %>
         <tr>
           <td><%= h.employee_id %></td>
-          <td><%= h.first_name %></td>
-          <td><%= h.last_name %></td>
-          <td><%= h.total_hours %> hrs</td>
+          <td style="width: 100vw"><%= h.first_name %></td>
+          <td style="width: 100vw"><%= h.last_name %></td>
+          <td style="width: 100vw"><%= h.total_hours %> hrs</td>
         </tr>
       <% }) %>
     </tbody>
