@@ -52,11 +52,11 @@ transactionsRouter
         });
 
 transactionsRouter
-    .route('/edit')  
+    .route('/edit/:transaction_id')  
     .get(requireLogin, async (req: Request, res: Response) => {
         
-        const transaction_id = req.query['transaction_id'];
-
+        const { transaction_id } = req.params;
+        
         if (typeof transaction_id === "string") {
             const transaction = await getTransaction(transaction_id);
             if (transaction) {
@@ -64,13 +64,14 @@ transactionsRouter
                     title: transaction.title,
                     price: String(transaction.price),
                     reg_plate: transaction.reg_plate,
-                    date: transaction.date,
+                    date: String(new Date(transaction.date).toISOString().split('T')[0]),
                     platform: String(transaction.platform)
                 };
             }
         }
-
+        
         res.render("transactions/edit", {
+            transaction_id,
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},
             success_message: req.session.success_message ?? ''
@@ -78,12 +79,19 @@ transactionsRouter
     })
     .post(requireLogin, async (req: Request, res: Response) => {
         if (!req.session.user_id) { throw new Error('No session userID'); }
-  
-            switch (await editTransaction(req.body.transaction_id, req.body.title, req.body.price, new Date(req.body.date), req.body.platform, req.body.reg_plate)) {
-                case 'OK': {
-                    req.session.success_message = 'Successfully edited transaction.';
-                    return res.redirect(req.originalUrl);
-                }   
-            }        
-        }
-    );
+        
+        const { transaction_id } = req.params;
+        
+        switch (await editTransaction(transaction_id, req.body.title, req.body.price, new Date(req.body.date), req.body.platform, req.body.reg_plate)) {
+            case 'OK': {
+                req.session.success_message = 'Successfully edited transaction.';
+                return res.redirect(req.originalUrl);
+            }   
+            case 'NO_ID_PROVIDED': {
+                req.session.input_errors ??= {};
+                req.session.input_errors[''] = 'Car registration not in database.';
+                req.session.form_values = { ...req.body };
+                return res.redirect(req.originalUrl)
+            }   
+        }        
+    });

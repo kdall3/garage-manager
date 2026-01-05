@@ -27,7 +27,7 @@
             <% } %>
             
             <% transactions.forEach(t => { %>
-            <tr onclick="location.href='/transactions/edit?transaction_id=<%= encodeURIComponent(t.transactionID) %>'">
+            <tr onclick="location.href='/transactions/edit/<%= t.transactionID %>'">
                 <td><%= new Date(t.date).toLocaleDateString() %></td>
                 <td><%= t.title %></td>
                 <td><%= t.reg_plate %></td>

@@ -46,7 +46,10 @@ export async function addTransaction(title: string, price: number, date: Date, p
   } 
 
   await db.query(
-      'INSERT INTO transactions (reg_plate, title, price, platform, date) VALUES (?, ?, ?, ?, ?)',
+      `
+      INSERT INTO transactions (reg_plate, title, price, platform, date) 
+      VALUES (?, ?, ?, ?, ?)
+      `,
       [reg_plate, title, price, platform, date]
   );
   return 'OK';
@@ -62,16 +65,22 @@ export async function delTransaction(transaction_ID: number): Promise<void> {
   );
 }
   
-export async function editTransaction(transaction_ID: number, title: string, price: number, date: Date, platform: string, reg_plate: string): Promise<'OK'> {
-  await db.query(
-    `
-    UPDATE transactions
-    SET title=?, price=?, date=?, platform=?, reg_plate=?
-    WHERE transactionID=?
-    `,
-    [title, price, date, platform, reg_plate, transaction_ID]
-  );
-  return 'OK';
+export async function editTransaction(transaction_ID: string | undefined, title: string, price: number, date: Date, platform: string, reg_plate: string): Promise<'OK' | 'NO_ID_PROVIDED'> {
+
+  if (typeof transaction_ID === 'undefined') {
+    return 'NO_ID_PROVIDED';
+  } else {
+
+    await db.query(
+      `
+      UPDATE transactions
+      SET title=?, price=?, date=?, platform=?, reg_plate=?
+      WHERE transactionID=?
+      `,
+      [title, price, date, platform, reg_plate, transaction_ID]
+    );
+    return 'OK';
+  }
 }
 
 export async function carProfitLossByReg(reg_plate: string): Promise<number> {

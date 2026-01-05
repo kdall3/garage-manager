@@ -8,7 +8,7 @@
 
     <h1 class="subheader">Edit Transaction</h1>
 
-    <form action="/transactions/edit" method="POST">
+    <form action="/transactions/edit/<%= transaction_id %>" method="POST">
         
         <%- include("../partials/field", {
             label: "Title",
