@@ -18,7 +18,7 @@
         <a href="/hours/add?reg_plate=<%= encodeURIComponent(car.reg_plate) %>" class="card">
         <h3><%= car.reg_plate %></h3>
         <p><strong><%= car.make %> <%= car.model %></strong></p>
-        <p>Hours Worked: <%= carHours.get(car.reg_plate) %>h</p>
+        <p>Hours Worked: <%= carHours.has(car.reg_plate) ? carHours.get(car.reg_plate) : 0 %>h</p>
         <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= car.profit_loss %></p>
         </a>
 
