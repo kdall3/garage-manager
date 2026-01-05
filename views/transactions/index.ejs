@@ -30,8 +30,8 @@
             <tr onclick="location.href='/transactions/edit/<%= t.transactionID %>'">
                 <td><%= new Date(t.date).toLocaleDateString() %></td>
                 <td><%= t.title %></td>
-                <td><%= t.reg_plate %></td>
                 <td>£<%= t.price.toFixed(2) %></td>
+                <td><%= t.reg_plate %></td>
                 <td><%= t.platform ?? "-" %></td>
                 <td onclick="event.stopPropagation()">
                     <form class="delete-form" action="/transactions" method="POST" onsubmit="return confirm('Delete this transaction?');">
