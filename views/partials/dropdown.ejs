@@ -7,7 +7,7 @@
 
     <% list.forEach(item => { %>
       <option value="<%= item %>"
-            <%= (form_values[name] === item) ? 'selected' : '' %>>
+            <%= form_values[name] === item ? 'selected' : '' %>>
         <%= item %>
       </option>
     <% }) %>

@@ -205,13 +205,26 @@ form {
   flex-direction: column;
   align-items: center;
   text-align: left;
-  padding: 20px;
+  padding: 10px;
 }
 
 form button {
   display: inline-block;
   width: 200px;
   margin-top: 12px;
+}
+
+div.dropdown select {
+  padding: 8px;
+  background: #1e1e1e;
+  color: #eee;
+  border: 1px solid #2f2f2f;
+  border-radius: 6px;
+  font-size: 1rem;
+
+  min-width: 150px;
+  width: 20vw;
+  max-width: 280px;
 }
 
 div.dropdown {
@@ -224,7 +237,7 @@ div.dropdown {
 div.dropdown * {
   display: inline-block;
   vertical-align: top;
-  width: 200px;
+  width: 170px;
 }
 
 div.field {
@@ -237,12 +250,35 @@ div.field {
 div.field * {
   display: inline-block;
   vertical-align: top;
-  width: 200px;
+  width: 170px;
 }
 
 div.field textarea {
-  resize: vertical;
   min-height: 22px;
+  min-width: 150px;
+  width: 20vw;
+  max-width: 280px;
+  
+  resize: vertical;
+  padding: 8px;
+  background: #1e1e1e;
+  color: #eee;
+  border: 1px solid #2f2f2f;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+div.field input {
+  min-width: 150px;
+  width: 20vw;
+  max-width: 280px;
+
+  padding: 8px;
+  background: #1e1e1e;
+  color: #eee;
+  border: 1px solid #2f2f2f;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 p.success-message {
