@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import { requireLogin } from "../middleware/requireLogin";
 import { addShift } from "../db/hours";
 import { getShiftsOnDate } from "../db/hours";
+import { getInStock } from "../db/cars";
 
 const parseDate = (date_str: string): Date | null => {
     let date: Date | null = new Date(date_str);
@@ -63,7 +64,7 @@ hoursRouter
 
 hoursRouter
     .route('/add')
-    .get(requireLogin, (req: Request, res: Response) => {
+    .get(requireLogin, async (req: Request, res: Response) => {
 
         req.session.form_values ??= {};
         
@@ -82,7 +83,10 @@ hoursRouter
             req.session.form_values['end_time'] = `${req.query['date']}T00:00`
         }
 
+        const cars = await getInStock();
+
         res.render('hours/add', {
+            cars,
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},
             success_message: req.session.success_message ?? ''

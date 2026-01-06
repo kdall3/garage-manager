@@ -214,6 +214,19 @@ form button {
   margin-top: 12px;
 }
 
+div.dropdown {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+div.dropdown * {
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+}
+
 div.field {
   display: flex;
   flex-direction: row;

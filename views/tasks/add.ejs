@@ -19,10 +19,11 @@
             input_errors
         }) %>
 
-        <%- include("../partials/field", {
+        <%- include("../partials/dropdown", {
+            list: cars,
             label: "Car Registration",
             name: "reg_plate",
-            type: "text",
+            prompt: "",
             required: false,
             form_values,
             input_errors

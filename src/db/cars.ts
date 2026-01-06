@@ -49,6 +49,19 @@ export async function getCars(): Promise<Car[]> {
   return rows;
 }
 
+export async function getInStock(): Promise<String[]> {
+  const [rows] = await db.query<Car>(
+    `
+    SELECT
+      reg_plate
+    FROM cars
+    WHERE status != "Sold"
+    `
+  );
+
+  return rows.map(r => r.reg_plate);
+}
+
 export async function addCar(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string, buy_price: number, platform: string, buy_date: Date): Promise<'OK' | 'CAR_ALREADY_EXISTS'> {
   
   if (getCarFromReg(reg_plate) == null) {return 'CAR_ALREADY_EXISTS'}

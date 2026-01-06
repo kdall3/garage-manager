@@ -3,6 +3,7 @@ import { requireLogin } from "../middleware/requireLogin";
 import { getAllTasks } from "../db/tasks";
 import { toggleActive } from "../db/tasks";
 import { addTask } from "../db/tasks";
+import { getInStock } from "../db/cars";
 
 export const tasksRouter = express.Router();
 
@@ -29,7 +30,11 @@ tasksRouter
 tasksRouter
     .route('/add')
     .get(requireLogin, async (req: Request, res: Response) => {
+
+        const cars = await getInStock();
+
         res.render("tasks/add", {
+            cars,
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},
             success_message: req.session.success_message ?? ''

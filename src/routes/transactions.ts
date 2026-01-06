@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { requireLogin } from "../middleware/requireLogin";
+import { getInStock } from "../db/cars";
 import { getLatestTransactions } from "../db/transactions";
 import { addTransaction } from "../db/transactions";
 import { delTransaction } from "../db/transactions";
@@ -28,8 +29,12 @@ transactionsRouter
 
 transactionsRouter
     .route('/add')  
-    .get(requireLogin, (req: Request, res: Response) => {
+    .get(requireLogin, async (req: Request, res: Response) => {
+
+        const cars = await getInStock();
+
         res.render("transactions/add", {
+            cars,
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},
             success_message: req.session.success_message ?? ''
@@ -70,7 +75,10 @@ transactionsRouter
             }
         }
         
+        const cars = await getInStock();
+
         res.render("transactions/edit", {
+            cars,
             transaction_id,
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},

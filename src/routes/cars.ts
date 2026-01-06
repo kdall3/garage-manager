@@ -5,6 +5,7 @@ import { getCars } from "../db/cars";
 import { getCarFromReg } from "../db/cars";
 import { addCar } from "../db/cars";
 import { editCarDetails } from "../db/cars";
+import { getInStock } from "../db/cars";
 import { sellCar } from "../db/cars";
 import { hoursPerCar } from "../db/hours";
 import { hoursPerEmployee } from "../db/hours";
@@ -27,7 +28,10 @@ carsRouter
     .route('/add')
     .get(requireLogin, async (req: Request, res: Response) => {
         
+        const cars = await getInStock();
+
         res.render("cars/add", {
+            cars,
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},
             success_message: req.session.success_message ?? ''
@@ -75,7 +79,10 @@ carsRouter
             }
         }
         
+        const cars = await getInStock();
+        
         res.render("cars/edit", {
+            cars,
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},
             success_message: req.session.success_message ?? ''
@@ -108,7 +115,10 @@ carsRouter
             req.session.form_values['reg_plate'] = req.params['reg_plate'];
         }
         
+        const cars = await getInStock();
+
         res.render("cars/sell", {
+            cars,
             form_values: req.session.form_values ?? {},
             input_errors: req.session.input_errors ?? {},
             success_message: req.session.success_message ?? ''
