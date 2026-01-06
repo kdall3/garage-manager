@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head") %>
+
+<body>
+  <%- include("../partials/profile-button") %>
+
+  <h1 class="subheader"><%= car.reg_plate %></h1>
+
+    <div class="car-gallery">
+        
+        <img src="/uploads/cars/<%= car.reg_plate %>/Front L.png" alt="Car image" class="gallery-item"/>
+        <img src="/uploads/cars/<%= car.reg_plate %>/Back L.png" alt="Car image" class="gallery-item"/>
+        <img src="/uploads/cars/<%= car.reg_plate %>/Front R.png" alt="Car image" class="gallery-item"/>
+        <img src="/uploads/cars/<%= car.reg_plate %>/Back R.png" alt="Car image" class="gallery-item"/>
+
+    </div>
+
+  
+  <%- include("../partials/footer") %>
+
+</body>
+</html>

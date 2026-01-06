@@ -16,6 +16,11 @@
         <h3><%= car.reg_plate %></h3>
         <p><strong><%= car.make %> <%= car.model %></strong></p>
         <p><%= car.year %> • <%= car.mileage %> miles</p>
+        <img
+            src="/uploads/cars/<%= car.reg_plate %>/Front L.png"
+            alt="Car image"
+            class="car-image"
+        />
         <p class="status <%= car.status %>"><%= car.status %></p>
         <p>Total Hours: <%= carHours.get(car.reg_plate) %>h</p>
         <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= car.profit_loss %></p>

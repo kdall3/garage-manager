@@ -78,6 +78,7 @@ body {
 
 /* #region Cards */
 
+
 .card {
   background: #1e1e1e;
   border-radius: 12px;
@@ -85,11 +86,11 @@ body {
   box-shadow: 0 6px 16px rgba(0,0,0,0.3);
   text-decoration: none;
   color: white;
-
+  max-width: 1500px;
+  
   width: 100%;
   padding: 16px;
 }
-
 
 table.table-card {
   font-size: 0.9rem;
@@ -517,6 +518,32 @@ p.profit-loss-bar.profit {
 p.profit-loss-bar.loss {
   background-color: #c62828; /* red */
   color: #ffffff;
+}
+
+img.car-image {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+div.car-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+img.gallery-item {
+  width: 100%;
+  max-width: 650px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+img.gallery-item:hover {
+  transform: scale(1.05);
 }
 
 div.car-grid {

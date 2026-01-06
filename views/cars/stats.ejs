@@ -14,11 +14,20 @@
         <h3>Profit / Loss</h3>
         <p class="profit-loss-bar <%= car.profit_loss >= 0 ? 'profit' : 'loss' %>">£<%= profitLoss %></p>
       </div>
+      <a href='/cars/<%= car.reg_plate %>/gallery' class="card">
+        <img
+            src="/uploads/cars/<%= car.reg_plate %>/Front L.png"
+            alt="Car image"
+            class="car-image"
+            style="max-width: 450px"
+        />
+      </a>
     </div>
 
     <div class="hours-stats">
       <a href='/cars/<%= car.reg_plate %>/edit' class="card">
         <h3>Car Details</h3>
+        <p><strong><%= car.reg_plate %></strong></p>
         <p><strong><%= car.make %> <%= car.model %></strong></p>
         <p><%= car.year %> • <%= car.mileage %> miles</p>
         <p><%= car.colour %></p>

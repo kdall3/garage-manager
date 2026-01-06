@@ -169,6 +169,27 @@ carsRouter
 );
 
 carsRouter
+    .route("/:reg_plate/gallery")    
+    .get(requireLogin, async (req: Request, res: Response) => {
+
+    const regPlate = req.params['reg_plate'];
+
+    if (!regPlate) {
+        return res.status(400).send("Missing reg plate");
+    }
+
+    const car = await getCarFromReg(regPlate);
+    if (!car) {
+      return res.status(404).render("404");
+    }
+
+    res.render("cars/gallery", {
+      car
+    });
+  }
+);
+
+carsRouter
     .route("/:reg_plate")    
     .get(requireLogin, async (req: Request, res: Response) => {
 
