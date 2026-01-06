@@ -481,7 +481,33 @@ button.delete-button:hover {
 
 /* #region Cars */
 
+.car-stats {
+  display: grid;
+  grid-template-areas:
+    "finance-stats hours-stats"
+    "set-sold add-hours";
+  gap: 20px;
+  margin-top: 20px;
+}
 
+.car-stats button.set-sold { grid-area: set-sold; }
+.car-stats button.add-hours { grid-area: add-hours; }
+
+.car-stats .finance-stats {
+  grid-area: finance-stats;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.car-stats .hours-stats {
+  grid-area: hours-stats;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
 
 /* #endregion */
 
@@ -530,7 +556,7 @@ img.car-image {
 div.car-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 10px;
+  gap: 15px;
 }
 
 img.gallery-item {
@@ -562,34 +588,6 @@ div.car-grid {
 
 div.car-grid > * {
   flex: 1 0 175px;
-}
-
-.car-stats {
-  display: grid;
-  grid-template-areas:
-    "finance-stats hours-stats"
-    "set-sold add-hours";
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.car-stats button.set-sold { grid-area: set-sold; }
-.car-stats button.add-hours { grid-area: add-hours; }
-
-.car-stats .finance-stats {
-  grid-area: finance-stats;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-}
-
-.car-stats .hours-stats {
-  grid-area: hours-stats;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
 }
 
 /* #endregion */
