@@ -10,7 +10,7 @@
 
     <h1 class="subheader">Edit Car</h1>
 
-    <form action="/cars/edit" method="POST">
+    <form action="/cars/:reg_plate/edit" method="POST">
         <%- include("../partials/dropdown", {
             list: cars,
             label: "Car Registration",
@@ -98,6 +98,8 @@
         </p>
 
         <button type="submit">Edit Car</button>
+
+    </form>
 
     <%- include("../partials/footer") %>
 
