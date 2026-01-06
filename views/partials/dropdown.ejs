@@ -1,17 +1,16 @@
 <div class="dropdown">
-  <label for="<%= name %>"><%= label %></label>
+    <label for="<%= name %>"><%= label %></label>
 
-  <select name="<%= name %>" id="<%= name %>" <%= required ? "required" : "" %>>
-    <option value=""><%= prompt %></option>
+    <select name="<%= name %>" id="<%= name %>" <%= required ? "required" : "" %>>
+        <option value=""><%= prompt %></option>
     
-
-    <% list.forEach(item => { %>
-      <option value="<%= item %>"
-            <%= form_values[name] === item ? 'selected' : '' %>>
-        <%= item %>
-      </option>
-    <% }) %>
-  </select>
+        <% list.forEach(item => { %>
+            <option value="<%= item %>" <%= form_values[name] === item ? 'selected' : '' %>>
+                <%= item %>
+            </option>
+        <% }) %>
+    
+    </select>
 </div>
 
 <p class="error-message">
