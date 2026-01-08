@@ -12,7 +12,7 @@ export const transactionsRouter = express.Router();
 transactionsRouter
     .route('/')
     .get(requireLogin, async (req: Request, res: Response) => {
-        const transactions = await getLatestTransactions(20);
+        const transactions = await getLatestTransactions(12);
         res.render('transactions/', {
             transactions
         });
