@@ -10,12 +10,11 @@
     <h1 class="subheader">Add Car</h1>
 
     <form action="/cars/add" method="POST">
-        <%- include("../partials/dropdown", {
-            list: cars,
+        <%- include("../partials/field", {
             label: "Car Registration",
-            name: "reg_plate",
-            prompt: "",
-            required: false,
+            name: "car_reg",
+            type: "text",
+            required: true,
             form_values,
             input_errors
         }) %>
