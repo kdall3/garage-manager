@@ -11,7 +11,7 @@ dashboardRouter
     .route('/')
     .get(requireLogin, async (req: Request, res: Response) => {
         const cars = await getCars();
-        const carsInStock = cars.filter(car => car.status !== 'Sold');
+        const carsInStock = cars.filter(car => car.status !== 'Sold' && car.status !== 'Personal');
         const activeTasks = await getActiveTasks();
         const carHours = await hoursPerCar(req.session.user_id);
 
