@@ -83,6 +83,21 @@ export async function editTransaction(transaction_ID: string | undefined, title:
   }
 }
 
+export async function transactionsPerCar(reg_plate: string, limit = 20): Promise<Transaction[]> {
+  const [rows] = await db.query<Transaction>(
+    `
+    SELECT transactionID, reg_plate, title, price, date, platform
+    FROM transactions
+    WHERE reg_plate=?
+    ORDER BY date DESC
+    LIMIT ?
+    `,
+    [reg_plate, limit]
+  );
+
+  return rows;
+}
+
 export async function carProfitLossByReg(reg_plate: string): Promise<number> {
   const [rows] = await db.query<{ profit_loss: number }>(
     `

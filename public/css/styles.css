@@ -92,9 +92,12 @@ body {
   padding: 16px;
 }
 
+div.table {
+  margin: 16px;
+}
+
 table.table-card {
   font-size: 0.9rem;
-  margin: 16px 0;
   border-collapse: collapse;
   background: #1e1e1e;
   border-radius: 12px;
@@ -506,14 +509,15 @@ img.car-image {
 .car-stats {
   display: grid;
   grid-template-areas:
-    "finance-stats hours-stats"
-    "set-sold add-hours";
+    "finance-stats hours-stats transaction-table"
+    "set-sold add-hours add-transaction";
   gap: 20px;
   margin-top: 20px;
 }
 
 .car-stats button.set-sold { grid-area: set-sold; }
 .car-stats button.add-hours { grid-area: add-hours; }
+.car-stats button.add-transaction { grid-area: add-transaction; }
 
 .car-stats .finance-stats {
   grid-area: finance-stats;
@@ -526,6 +530,15 @@ img.car-image {
 
 .car-stats .hours-stats {
   grid-area: hours-stats;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  max-width: 360px;
+}
+
+.car-stats .transaction-table {
+  grid-area: transaction-table;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -605,11 +618,19 @@ div.car-grid > * {
     margin-top: 20px;
   }
 
+  div.transaction-table {
+    margin-top: 20px;
+  }
+
   button.set-sold {
     width: 100%;
   }
   
   button.add-hours {
+    width: 100%;
+  }
+  
+  button.add-transaction {
     width: 100%;
   }
 }

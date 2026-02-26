@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { requireLogin } from "../middleware/requireLogin";
 import { carProfitLossByReg } from "../db/transactions";
+import { transactionsPerCar } from "../db/transactions";
 import { getCars } from "../db/cars";
 import { getCarFromReg } from "../db/cars";
 import { addCar } from "../db/cars";
@@ -206,11 +207,13 @@ carsRouter
 
     const profitLoss = await carProfitLossByReg(regPlate);
     const hoursWorked = await hoursPerCar();
+    const transactions = await transactionsPerCar(regPlate, 13);
 
     res.render("cars/stats", {
       car,
       profitLoss,
-      hoursWorked
+      hoursWorked,
+      transactions
     });
   }
 );
