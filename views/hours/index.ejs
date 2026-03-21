@@ -8,6 +8,8 @@
 
     <h1 class="subheader">Shift Calendar</h1>
 
+    <div class="timeline-outer-wrapper">
+
         <div style="display: flex; align-items: center; justify-content: space-between;">
             <%- date === null ? 'No date selected' : `<h2 class="subheader-no-pad">${date.toDateString()}</h2>` %>
 
@@ -23,14 +25,17 @@
             <%-
             include("../partials/shift-timeline", {
                 shift_list,
+                date,
                 left_redirect: `/hours/?date=${previous_date.toISOString().split('T')[0]}`,
                 right_redirect: `/hours/?date=${next_date.toISOString().split('T')[0]}`})
             %>
         <% } %>
 
-    <%-
-    `<button onclick="location.href='/hours/add?date=${date.toISOString().split('T')[0]}'">Add New Shift</button>`
-    %>
+        <%-
+        `<button class="add-shift" onclick="location.href='/hours/add?date=${date.toISOString().split('T')[0]}'">Add New Shift</button>`
+        %>
+
+    </div>
 
     <%- include("../partials/footer") %>
 </body>

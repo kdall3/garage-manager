@@ -23,20 +23,43 @@
                     <div class="timeline-bar">
                         <% for (let j = 0; j < employee_shift.shifts.length; j++) { 
                             const shift = employee_shift.shifts[j];
+
+                            // Calculate shift bar position
                             const start_percent = (shift.start_hour * 60 + shift.start_minute) / (24 * 60) * 100;
                             const end_percent = (shift.end_hour * 60 + shift.end_minute) / (24 * 60) * 100;
                             const width_percent = end_percent - start_percent;
+
+                            // Convert hex to RGB
+                            const hex = shift.colour_hex.replace("#", "");
+                            const r = parseInt(hex.substring(0,2),16);
+                            const g = parseInt(hex.substring(2,4),16);
+                            const b = parseInt(hex.substring(4,6),16);
+
+                            // Calculate perceived brightness
+                            const brightness = (r*299 + g*587 + b*114)/1000;
+
+                            // Choose text/border colour
+                            const text_colour = brightness > 128 ? "#000000" : "#FFFFFF";  // Black/White
+                            const border_colour = brightness > 128 ? "#000000" : "#B1B1B1";  // Black/Light Grey
                         %>
                             <%- `
-                            <div class="shift" style="left: ${start_percent}%; width: ${width_percent}%"><div class="shift-label">${shift.make_model}
-                                <span class="extra-info">\
-                                    Car worked on: ${shift.make_model}
-                                    Car reg: ${shift.reg_plate}
-                                    Start time: ${String(shift.start_hour).padStart(2, '0')}:${String(shift.start_minute).padStart(2, '0')}
-                                    End time: ${String(shift.end_hour).padStart(2, '0')}:${String(shift.end_minute).padStart(2, '0')}
-                                    Notes: ${shift.notes ?? "N/A" }
-                                </span>
-                            </div></div>
+                            <div class="shift"
+                                 style="left: ${start_percent}%; width: ${width_percent}%;
+                                        background-color: ${shift.colour_hex};
+                                        color: ${text_colour}; 
+                                        border: 1px solid ${border_colour};">
+                                
+                                <div class="shift-label">
+                                    ${shift.make_model}
+                                    <span class="extra-info">\
+                                        Car worked on: ${shift.make_model}
+                                        Car reg: ${shift.reg_plate}
+                                        Start time: ${String(shift.start_hour).padStart(2, '0')}:${String(shift.start_minute).padStart(2, '0')}
+                                        End time: ${String(shift.end_hour).padStart(2, '0')}:${String(shift.end_minute).padStart(2, '0')}
+                                        Notes: ${shift.notes ?? "N/A" }
+                                    </span>
+                                </div>
+                            </div>
                             ` %>
                         <% } %>
                     </div>

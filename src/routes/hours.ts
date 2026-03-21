@@ -30,7 +30,7 @@ hoursRouter
         const date_str = req.query['date'] as string;
         let date: Date | null = null;
 
-        // Parse date if exists
+        // Parse date if exists, otherwise use todays date
         if (date_str) {
             date = new Date(date_str);
             if (isNaN(date.getTime())) { date = null; }

@@ -12,6 +12,7 @@ export interface EmployeeShifts {
     end_minute: number;
     reg_plate: string;
     make_model: string;
+    colour_hex: string;
     notes: string;
   }[];
 }
@@ -24,7 +25,8 @@ interface Shift {
     last_name: string,
     reg_plate: string,
     car_make: string,
-    car_model: string
+    car_model: string,
+    car_colour_hex: string,
     start: Date,
     end: Date,
     notes: string
@@ -64,7 +66,7 @@ export async function addShift(employee_id: number, reg_plate: string, start_tim
 
 export async function getShiftsOnDate(date: Date): Promise<EmployeeShifts[]> {
     const [rows] = await db.query<Shift>(
-        'SELECT hours.shift_id, hours.employee_id, employees.first_name, employees.last_name, cars.reg_plate, cars.make AS car_make, cars.model AS car_model, hours.start, hours.end, hours.notes \
+        'SELECT hours.shift_id, hours.employee_id, employees.first_name, employees.last_name, cars.reg_plate, cars.make AS car_make, cars.model AS car_model, cars.colour_hex as car_colour_hex, hours.start, hours.end, hours.notes \
         FROM hours \
         JOIN employees ON hours.employee_id = employees.employee_id \
         JOIN cars ON hours.reg_plate = cars.reg_plate \
@@ -91,6 +93,7 @@ export async function getShiftsOnDate(date: Date): Promise<EmployeeShifts[]> {
             end_minute: shift.end.getMinutes(),
             reg_plate: shift.reg_plate,
             make_model: `${shift.car_make} ${shift.car_model}`,
+            colour_hex: shift.car_colour_hex,
             notes: shift.notes
         });
 
