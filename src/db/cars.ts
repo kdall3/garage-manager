@@ -85,17 +85,17 @@ export async function addCar(reg_plate: string, make: string, model: string, yea
   return 'OK';
 };
 
-export async function editCarDetails(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string): Promise<'OK' | 'CAR_DOESNT_EXIST'> {
+export async function editCarDetails(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, colour_hex: string, damage: string, description: string, status: string): Promise<'OK' | 'CAR_DOESNT_EXIST'> {
   
   if (getCarFromReg(reg_plate) == null) {return 'CAR_DOESNT_EXIST'}
   
   await db.query(
     `
     UPDATE cars
-    SET make = ?, model = ?, year = ?, mileage = ?, colour = ?, damage = ?, description = ?, status = ?
+    SET make = ?, model = ?, year = ?, mileage = ?, colour = ?, colour_hex = ?, damage = ?, description = ?, status = ?
     WHERE reg_plate = ?
     `,
-    [make, model, year, mileage, colour, damage, description, status, reg_plate]
+    [make, model, year, mileage, colour, colour_hex, damage, description, status, reg_plate]
   );
   
   return 'OK';

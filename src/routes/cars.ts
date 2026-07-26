@@ -92,7 +92,7 @@ carsRouter
     .post(async (req: Request, res: Response) => {
         if (!req.session.user_id) { throw new Error('No session userID'); }
 
-        switch (await editCarDetails(req.body.reg_plate, req.body.make, req.body.model, req.body.year, req.body.mileage, req.body.colour, req.body.damage, req.body.description, req.body.status)) {
+        switch (await editCarDetails(req.body.reg_plate, req.body.make, req.body.model, req.body.year, req.body.mileage, req.body.colour, req.body.colour_hex, req.body.damage, req.body.description, req.body.status)) {
             case 'OK': {
                 req.session.success_message = 'Successfully edited car.';
                 return res.redirect(req.originalUrl);
