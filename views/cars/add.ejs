@@ -56,10 +56,19 @@
         }) %>
 
         <%- include("../partials/field", {
-            label: "Colour",
+            label: "Colour (text)",
             name: "colour",
             type: "text",
-            required: false,
+            required: true,
+            form_values,
+            input_errors
+        }) %>
+
+        <%- include("../partials/field", {
+            label: "Colour (hex value)",
+            name: "colour_hex",
+            type: "color",
+            required: true,
             form_values,
             input_errors
         }) %>

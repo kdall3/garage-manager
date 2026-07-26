@@ -62,16 +62,16 @@ export async function getInStock(): Promise<String[]> {
   return rows.map(r => r.reg_plate);
 }
 
-export async function addCar(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, damage: string, description: string, status: string, buy_price: number, platform: string, buy_date: Date): Promise<'OK' | 'CAR_ALREADY_EXISTS'> {
+export async function addCar(reg_plate: string, make: string, model: string, year: number, mileage: number, colour: string, colour_hex:string, damage: string, description: string, status: string, buy_price: number, platform: string, buy_date: Date): Promise<'OK' | 'CAR_ALREADY_EXISTS'> {
   
   if (getCarFromReg(reg_plate) == null) {return 'CAR_ALREADY_EXISTS'}
   
   await db.query(
     `
-    INSERT INTO cars (reg_plate, make, model, year, mileage, colour, damage, description, status) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO cars (reg_plate, make, model, year, mileage, colour, colour_hex, damage, description, status) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `,
-    [reg_plate, make, model, year, mileage, colour, damage, description, status]
+    [reg_plate, make, model, year, mileage, colour, colour_hex, damage, description, status]
   )
   
   await db.query(
